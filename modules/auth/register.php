@@ -22,7 +22,7 @@ require ASSET_PATH . 'header.php';
                     </div>
                     <div class="col-md-6">
                         <label for="">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm-pwd" placeholder="">
+                        <input type="password" class="form-control" name="confirm_pwd" placeholder="">
                     </div>
                 </div>
                 <div class="row">

@@ -11,7 +11,7 @@ if (!isset($_GET['action'])) {
     $_GET['action'] = 'index';
 }
 
-require $_SERVER['DOCUMENT_ROOT'].'/PHP_MVC/ekb/define.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ekb/define.php';
 
 if (isset($_GET['module'])) {
     $filepath = APP_PATH . 'modules/' . $_GET['module'] . '/' . $_GET['action'] . '.php';
