@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300;1,400&display=swap');
+
+.list-group-item.active {
+    z-index: 2;
+    color: #CD9118;
+    background-color: #f4eee2;
+    border-color: #f4eee2;
+}
+
+/* #DAB050 */
+
+.bg-ekb {
+    --mdb--bg-opacity: 1;
+    background-color: #DAB050;
+}
+
+.bg-black {
+    --mdb--bg-opacity: 1;
+    background-color: #000000;
+}

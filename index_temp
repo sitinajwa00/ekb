@@ -1,0 +1,31 @@
+<?php 
+
+#check module
+if (!isset($_GET['module']) || is_array($_GET['module'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
+
+#check action
+if (!isset($_GET['action'])) {
+    $_GET['action'] = 'index';
+}
+
+require $_SERVER['DOCUMENT_ROOT'].'/PHP_MVC/ekb/define.php';
+
+$filepath = APP_PATH . 'modules/' . $_GET['module'] . '/' . $_GET['action'] . '.php';
+
+if (!file_exists($filepath)) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
+
+session_start();
+
+if (!isset($_SESSION['user']) && $_GET['module'] != 'auth') {
+    APP_URL . '?module=auth&action=login';
+}
+
+require $filepath;
+
+?>

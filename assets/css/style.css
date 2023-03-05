@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F4EEE2;
+    font-family: 'Lato', sans-serif;
+}
+
+h3 {
+    text-align: center;
+}
+
+.bg-container {
+    background-color: #FADE73;
+    margin: auto;
+    margin-top: 50px;
+    width: 85%;
+    height: 600px;
+    border: 1px solid #FADE73;
+}
+
+.bg-login-container {
+    /* position: absolute;
+    top: 50px; */
+    background-color: whitesmoke;
+    margin: auto;
+    margin-top: 50px;
+    padding: 10px 15px;
+    width: 35%;
+}
+
+.bg-register-container {
+    /* position: absolute;
+    top: 50px; */
+    background-color: whitesmoke;
+    margin: auto;
+    margin-top: 50px;
+    padding: 10px 15px;
+    width: 50%;
+}
+
+.img-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.login-btn {
+    background-color: #DAB050;
+    color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    padding: 5px 0;
+    border: none;
+}
+
+.login-btn:hover {
+    background-color: darkgoldenrod;
+}
+
+.no-account span a{
+    color: blue;
+    text-decoration: none;
+}
+
+.navbar {
+    font-weight: 300;
+    opacity: 75%;
+}
+
+.navbar-nav {
+    margin-left: 45%;
+}
+
+.navbar-admin {
+    margin-left: 30%;
+}
+
+.navlogo {
+    width: 50px;
+}
+
+.brand {
+    color: white;
+    color: #FADE73;
+}
+
+.nav-item, .nav-link{
+    color: white;
+}
+
+.nav-link:hover {
+    color: goldenrod;
+}
+
+.nav-icon {
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-icon .nav-icon-1 {
+    display: flex;
+    width: 50px;
+    justify-content: space-around;
+}
+
