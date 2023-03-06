@@ -10,34 +10,59 @@
      >
   <div class="position-sticky">
     <div class="list-group list-group-flush mx-3 mt-4">
+      <!-- Home -->
+      <?php if ($_GET['module'] == 'home') {?>
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=home"
          class="list-group-item list-group-item-action py-4 ripple active"
          aria-current="true"
          >
         <i class="fas fa-tachometer-alt fa-fw me-3"></i
           ><span>Home</span>
       </a>
-      <a
-         href="#"
+      <?php } else {?>
+        <a
+         href="<?php echo APP_URL ?>?module=home"
          class="list-group-item list-group-item-action py-4 ripple "
          aria-current="true"
          >
-         <i class="fa-solid fa-box-open fa-fw me-3"></i><span>Products</span>
+        <i class="fas fa-tachometer-alt fa-fw me-3"></i
+          ><span>Home</span>
       </a>
+      <?php }?>
+      
+      <!-- Shopping -->
+      <?php if ($_GET['module'] == 'order') {?>
       <a
-         href="#"
-         class="list-group-item list-group-item-action py-4 ripple"
+         href="<?php echo APP_URL ?>?module=order&action=product"
+         class="list-group-item list-group-item-action py-4 ripple active"
          aria-current="true"
          >
-         <i class="fa-solid fa-basket-shopping fa-fw me-3"></i><span>Order</span>
+         <i class="fa-solid fa-basket-shopping fa-fw me-3"></i><span>Shopping</span>
       </a>
+      <?php } else {?>
+        <a
+         href="<?php echo APP_URL ?>?module=order&action=product"
+         class="list-group-item list-group-item-action py-4 ripple "
+         aria-current="true"
+         >
+         <i class="fa-solid fa-basket-shopping fa-fw me-3"></i><span>Shopping</span>
+      </a>
+      <?php }?>
+      
       <a
          href="#"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
          <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span>My Order</span>
+      </a>
+      <a
+         href="#"
+         class="list-group-item list-group-item-action py-4 ripple"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-clock-rotate-left fa-fw me-3"></i><span>Order History</span>
       </a>
       <a
          href="#"
