@@ -24,6 +24,10 @@ class ProductController extends Product {
     public function editProduct($id, $name, $is_cod, $is_delivery, $price_cod, $price_delivery, $weight, $desc, $image) {
         $this->updateProduct($id, $name, $is_cod, $is_delivery, $price_cod, $price_delivery, $weight, $desc, $image);
     }
+
+    public function removeProduct($productID) {
+        $this->deleteProduct($productID);
+    }
 }
 
 ?>

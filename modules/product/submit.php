@@ -100,6 +100,14 @@ if (isset($_POST['submit'])) {
     // $product->editProduct($id, $name, $is_cod, $is_delivery, $price_cod, $price_delivery, $weight, $desc, $old_image);
 
     // echo 'check db';
+} else {
+    $product = new ProductController();
+    $product->removeProduct($_GET['product_id']);
+
+    echo '<script>
+        alert("Successfully Delete Product");
+        window.location.href = "'.APP_URL.'?module=product";
+    </script>';
 }
 
 

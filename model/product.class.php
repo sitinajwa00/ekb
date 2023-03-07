@@ -50,6 +50,12 @@ class Product extends Db {
 
         $stmt->execute();
     }
+
+    protected function deleteProduct($productID) {
+        $sql = "DELETE from products WHERE productID='$productID'";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+    }
 }
 
 ?>

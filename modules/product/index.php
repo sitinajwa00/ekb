@@ -91,7 +91,16 @@ $(document).ready(function () {
     dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
     });
 });
+
+$(document).on('click', '.item-delete', function(){
+    var product_id = $(this).attr('data-id');
+    var text = 'Are you sure to delete this product?';
+    if (confirm(text) == true) {
+        $(location).attr('href', '<?php echo APP_URL ?>?module=product&action=submit&product_id='+product_id);
+    }
+});
 </script>
+
 
 <?php
 
