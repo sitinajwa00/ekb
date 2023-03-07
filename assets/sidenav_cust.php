@@ -50,13 +50,24 @@
       </a>
       <?php }?>
       
+      <?php if ($_GET['module'] == 'cart') {?>
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=cart"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span>My Cart</span>
+      </a>
+      <?php } else {?>
+        <a
+         href="<?php echo APP_URL ?>?module=cart"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
-         <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span>My Order</span>
+         <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span>My Cart</span>
       </a>
+      <?php }?>
+      
       <a
          href="#"
          class="list-group-item list-group-item-action py-4 ripple"

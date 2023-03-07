@@ -20,7 +20,8 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=order&action=product">Product List</a></li>
+                        <li class="breadcrumb-item text-warning active">Product Detail</li>
                     </ol>
                     </nav>
                 </div>
@@ -65,38 +66,40 @@ require ASSET_PATH . 'sidenav_cust.php';
                     </div>
 
                     <!-- Order Detail -->
-                    <div class="border p-2">
+                    <form class="border p-2" action="<?php echo APP_URL.'?module=order&action=submit&product_id='.$_GET['product_id'] ?>" method="post">
+                        <input type="hidden" name="product_name" value="<?php echo $detail['productName'] ?>">
                         <div class="row col-12 mb-3 align-items-center">
                             <label for="" class="label-form col-2">Quantity:</label>
-                        <div class="col-2">
-                            <input type="number" class="form-control" min="0" value="0"> 
-                        </div>
-                        <div class="col-4">
-                            <small>## items available</small>
-                        </div>
+                            <div class="col-2">
+                                <input type="number" name="order_qty" class="form-control" min="0" value="1"> 
+                            </div>
+                            <div class="col-4">
+                                <small>## items available</small>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-2">
-                            <label for="" class="label-form">Delivery Type:</label>
-                        </div>
-                        <div class="mb-3 col-8">
-                            <div class="form-check">
-                            <input class="form-check-input" type="radio" name="delivery_type" id="radio1" value="delivery" checked>
-                            <label class="form-check-label" for="radio1">
-                                Delivery
-                            </label>
+                            <div class="col-2">
+                                <label for="" class="label-form">Delivery Type:</label>
                             </div>
-                            <div class="form-check">
-                            <input class="form-check-input" type="radio" name="delivery_type" value="cod" id="radio2">
-                            <label class="form-check-label" for="radio2">
-                                Cash On Delivery
-                            </label>
+                            <div class="mb-3 col-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="delivery_type" id="radio1" value="delivery" checked>
+                                    <label class="form-check-label" for="radio1">
+                                        Delivery
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="delivery_type" value="cod" id="radio2">
+                                    <label class="form-check-label" for="radio2">
+                                        Cash On Delivery
+                                    </label>
+                                </div>
                             </div>
-                        </div>
+                            <input type="hidden" name="unit_price" data-price-cod="<?php echo $detail['productPriceCOD'] ?>" data-price-dvry="<?php echo $detail['productPriceDvry'] ?>" value="<?php echo $detail['productPriceDvry'] ?>">
                         </div>
                         
-                        <span class="btn btn-dark">Add to cart</span>
-                    </div>
+                        <button type="submit" name="add_to_cart" class="btn btn-dark">Add to cart</button>
+                    </form>
                         
                 </div>
                 </div>
@@ -106,6 +109,16 @@ require ASSET_PATH . 'sidenav_cust.php';
     </div>
 </main>
 <!--Main layout-->
+
+<script>
+    $(document).on('click', '#radio1', function(){
+        $('input[name="unit_price"]').val($('input[name="unit_price"]').attr('data-price-dvry'));
+    });
+
+    $(document).on('click', '#radio2', function(){
+        $('input[name="unit_price"]').val($('input[name="unit_price"]').attr('data-price-cod'));
+    });
+</script>
 
 <?php
 

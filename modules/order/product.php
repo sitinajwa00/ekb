@@ -19,7 +19,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item text-warning active">Product List</li>
                     </ol>
                     </nav>
                 </div>
