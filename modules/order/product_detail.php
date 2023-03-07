@@ -42,8 +42,8 @@ require ASSET_PATH . 'sidenav_cust.php';
                             PRODUCT PRICE
                         </div>
                         <div class="row col-12 ps-2">
-                            <div class="col-2 text-secondary">Price <small>(Delivery)</small>:</div>
-                            <div class="col-10">RM <?php echo $detail['productPriceDvry'] ?></div>
+                            <div class="col-2 text-secondary">Price <small>(Postage)</small>:</div>
+                            <div class="col-10">RM <?php echo $detail['productPricePos'] ?></div>
                         </div>
                         <div class="row col-12 ps-2">
                             <div class="col-2 text-secondary">Price <small>(COD)</small>:</div>
@@ -83,9 +83,9 @@ require ASSET_PATH . 'sidenav_cust.php';
                             </div>
                             <div class="mb-3 col-8">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="delivery_type" id="radio1" value="delivery" checked>
+                                    <input class="form-check-input" type="radio" name="delivery_type" id="radio1" value="pos" checked>
                                     <label class="form-check-label" for="radio1">
-                                        Delivery
+                                        Postage
                                     </label>
                                 </div>
                                 <div class="form-check">
@@ -95,7 +95,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                     </label>
                                 </div>
                             </div>
-                            <input type="hidden" name="unit_price" data-price-cod="<?php echo $detail['productPriceCOD'] ?>" data-price-dvry="<?php echo $detail['productPriceDvry'] ?>" value="<?php echo $detail['productPriceDvry'] ?>">
+                            <input type="hidden" name="unit_price" data-price-cod="<?php echo $detail['productPriceCOD'] ?>" data-price-pos="<?php echo $detail['productPricePos'] ?>" value="<?php echo $detail['productPricePos'] ?>">
                         </div>
                         
                         <button type="submit" name="add_to_cart" class="btn btn-dark">Add to cart</button>
@@ -112,7 +112,7 @@ require ASSET_PATH . 'sidenav_cust.php';
 
 <script>
     $(document).on('click', '#radio1', function(){
-        $('input[name="unit_price"]').val($('input[name="unit_price"]').attr('data-price-dvry'));
+        $('input[name="unit_price"]').val($('input[name="unit_price"]').attr('data-price-pos'));
     });
 
     $(document).on('click', '#radio2', function(){

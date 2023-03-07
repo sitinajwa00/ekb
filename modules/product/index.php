@@ -39,7 +39,7 @@ require ASSET_PATH . 'sidenav_admin.php';
                 <th></th>
                 <th>Name</th>
                 <th>Price (COD)</th>
-                <th>Price (Delivery)</th>
+                <th>Price (Postage)</th>
                 <th>Weight</th>
                 <th>Action</th>
               </tr>
@@ -64,7 +64,7 @@ $(document).ready(function () {
         { data: 'productImage' },
         { data: 'productName' },
         { data: 'productPriceCOD' },
-        { data: 'productPriceDvry' },
+        { data: 'productPricePos' },
         { data: 'productWeight' },
         { data: '' }
     ],

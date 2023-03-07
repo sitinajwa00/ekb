@@ -9,9 +9,9 @@ if (isset($_POST['submit'])) {
     $desc = $_POST['description'];
     $weight = (isset($_POST['weight']) ? $_POST['weight'] : 'no');
     $is_cod = (isset($_POST['is_cod']) ? $_POST['is_cod'] : '0');
-    $is_delivery = (isset($_POST['is_delivery']) ? $_POST['is_delivery'] : '0');
+    $is_pos = (isset($_POST['is_pos']) ? $_POST['is_pos'] : '0');
     $price_cod = $_POST['codPrice'];
-    $price_delivery = $_POST['dvryPrice'];
+    $price_pos = $_POST['posPrice'];
 
     if ($_FILES['image']['error'] === 4) {
         $newImageName = '';
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
             move_uploaded_file($tempName, IMG_PATH . $newImageName);
             
             $product = new ProductController();
-            $product->createProduct($name, $is_cod, $is_delivery, $price_cod, $price_delivery, $weight, $desc, $newImageName);
+            $product->createProduct($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
 
             echo '<script>
                 alert("Successfully Add New Product");
@@ -50,16 +50,16 @@ if (isset($_POST['submit'])) {
     $desc = $_POST['description'];
     $weight = (isset($_POST['weight']) ? $_POST['weight'] : 'no');
     $is_cod = (isset($_POST['is_cod']) ? $_POST['is_cod'] : '0');
-    $is_delivery = (isset($_POST['is_delivery']) ? $_POST['is_delivery'] : '0');
+    $is_pos = (isset($_POST['is_pos']) ? $_POST['is_pos'] : '0');
     $price_cod = $_POST['codPrice'];
-    $price_delivery = $_POST['dvryPrice'];
+    $price_pos = $_POST['posPrice'];
     $old_image = (isset($_POST['old_image']) ? $_POST['old_image'] : '');
 
     if ($_FILES['image']['error'] === 4) {
         $newImageName = $old_image;
 
         $product = new ProductController();
-        $product->editProduct($id, $name, $is_cod, $is_delivery, $price_cod, $price_delivery, $weight, $desc, $old_image);
+        $product->editProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $old_image);
 
         echo '<script>
             alert("Successfully Update Product");
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
             move_uploaded_file($tempName, IMG_PATH . $newImageName);
             
             $product = new ProductController();
-            $product->editProduct($id, $name, $is_cod, $is_delivery, $price_cod, $price_delivery, $weight, $desc, $newImageName);
+            $product->editProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
 
             echo '<script>
                 alert("Successfully Update Product");

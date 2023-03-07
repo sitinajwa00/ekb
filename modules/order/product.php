@@ -43,8 +43,8 @@ require ASSET_PATH . 'sidenav_cust.php';
                     <div class="card-body pt-0">
                         <table class="col-12 mb-1">
                             <tr>
-                                <td>Price <small>(Delivery)</small>:</td>
-                                <td class="text-end">RM <?php echo $prod['productPriceDvry'] ?></td>
+                                <td>Price <small>(Postage)</small>:</td>
+                                <td class="text-end">RM <?php echo $prod['productPricePos'] ?></td>
                             </tr>
                             <tr>
                                 <td>Price <small>(COD)</small>:</td>
@@ -57,7 +57,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                             </div>
                             <div class="col-8">
                                 <select name="" id="" class="form-select">
-                                    <option value="delivery" selected>Delivery</option>
+                                    <option value="pos" selected>Postage</option>
                                     <option value="cod">COD</option>
                                 </select>
                             </div>

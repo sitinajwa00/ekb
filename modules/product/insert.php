@@ -100,9 +100,9 @@ require ASSET_PATH . 'sidenav_admin.php';
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" name="is_delivery" type="checkbox" value="1" id="serviceDelivery">
-                                <label class="form-check-label" for="serviceDelivery">
-                                    Delivery
+                                <input class="form-check-input" name="is_pos" type="checkbox" value="1" id="servicePos">
+                                <label class="form-check-label" for="servicePos">
+                                    Postage
                                 </label>
                             </div>
                         </div>
@@ -119,17 +119,17 @@ require ASSET_PATH . 'sidenav_admin.php';
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">RM</span>
                                     </div>
-                                    <input type="number" class="form-control" name="codPrice" placeholder="0.00">
+                                    <input type="number" class="form-control" name="codPrice" placeholder="0.00" min="0" step="0.01">
                                 </div>
                             </div>
-                            <!-- Delivery -->
+                            <!-- Postage -->
                             <div class="mb-3">
-                                <label for="" class="form-label">Delivery:</label>
+                                <label for="" class="form-label">Postage:</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">RM</span>
                                     </div>
-                                    <input type="number" class="form-control" name="dvryPrice" placeholder="0.00">
+                                    <input type="number" class="form-control" name="posPrice" placeholder="0.00" min="0" step="0.01">
                                 </div>
                             </div>
                         </div>
