@@ -12,6 +12,10 @@ class CartController extends Cart {
     public function createCart($userID, $productID, $product_name, $delivery_type, $unit_price, $order_qty, $total_price) {
         $this->insertCart($userID, $productID, $product_name, $delivery_type, $unit_price, $order_qty, $total_price);
     }
+
+    public function editQty($cartID, $qty, $total_price) {
+        $this->updateQty($cartID, $qty, $total_price);
+    }
 }
 
 ?>
