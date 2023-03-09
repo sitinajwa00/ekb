@@ -32,7 +32,7 @@ require ASSET_PATH . 'sidenav_cust.php';
             <div class="card-body">
                 <div class="row">
                 <div class="col-4">
-                    <img src="<?php echo IMG_URL . $detail['productImage'] ?>" class="w-100" alt="">
+                    <img src="<?php echo ($detail['productImage']!='' ? IMG_URL . $detail['productImage'] : ASSET_URL . '/images/default_image.jpg') ?>" class="w-100" alt="">
                 </div>
                 <div class="col-8">
                     <h4><?php echo $detail['productName'] ?></h4>

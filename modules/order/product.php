@@ -57,8 +57,8 @@ require ASSET_PATH . 'sidenav_cust.php';
                             </div>
                             <div class="col-8">
                                 <select name="" id="" class="form-select">
-                                    <option value="pos" selected>Postage</option>
-                                    <option value="cod">COD</option>
+                                    <option value="pos" <?php echo ($prod['is_pos']!='1' ? 'hidden disabled' : '') ?>>Postage</option>
+                                    <option value="cod" <?php echo ($prod['is_cod']!='1' ? 'hidden disabled' : '') ?>>COD</option>
                                 </select>
                             </div>
                         </div>

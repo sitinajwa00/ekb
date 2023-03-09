@@ -23,7 +23,7 @@ if (isset($_POST['add_to_cart'])) {
 
         if (confirm(text) == true) {
             // $(location).attr('href', '<?php echo APP_URL ?>?module=cart');
-            window.location.href = "<?php echo APP_URL ?>?module=cart";
+            window.location.href = "<?php echo APP_URL ?>?module=order&action=cart";
         } else {
             window.history.back();
         }
