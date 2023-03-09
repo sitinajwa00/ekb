@@ -4,6 +4,13 @@ if (!isset($_SESSION['login'])) {
     header('Location: ' . APP_URL . '?module=auth&action=login');
 }
 
+require INCL_PATH . 'db.inc.php';
+require INCL_PATH . 'cart.inc.php';
+
+$cart = new CartController();
+$cartList = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+$cartCount = count($cartList);
+
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_cust.php';
 
@@ -29,6 +36,12 @@ require ASSET_PATH . 'sidenav_cust.php';
     </div>
 </main>
 <!--Main layout-->
+
+<script>
+    $(document).ready(function(){
+        $('.my-cart-badge').html('<?php echo $cartCount ?>')
+    });
+</script>
 
 <?php
 

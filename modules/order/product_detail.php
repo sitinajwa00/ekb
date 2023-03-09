@@ -2,10 +2,15 @@
 
 require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'product.inc.php';
+require INCL_PATH . 'cart.inc.php';
 
 $product = new ProductController();
 $result = $product->displayProduct($_GET['product_id']);
 $detail = $result[0];
+
+$cart = new CartController();
+$cartList = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+$cartCount = count($cartList);
 
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_cust.php';
@@ -111,6 +116,10 @@ require ASSET_PATH . 'sidenav_cust.php';
 <!--Main layout-->
 
 <script>
+    $(document).ready(function(){
+        $('.my-cart-badge').html('<?php echo $cartCount; ?>');
+    });
+    
     $(document).on('click', '#radio1', function(){
         $('input[name="unit_price"]').val($('input[name="unit_price"]').attr('data-price-pos'));
     });

@@ -1,5 +1,5 @@
 
-  <body>
+<body>
 
 <!--Main Navigation-->
 <header>
@@ -125,8 +125,12 @@
 
       <!-- Icon -->
       <li class="nav-item">
-        <a class="nav-link me-3 me-lg-0" href="#">
-          <i class="fa-solid fa-cart-shopping"></i>
+        <a class="nav-link me-3 me-lg-0 position-relative" href="<?php echo APP_URL ?>?module=order&action=cart">
+          <i class="fa-solid fa-cart-shopping <?php echo ($_GET['module']=='order' && $_GET['action']=='cart' ? 'text-warning' : '') ?>"></i>
+          <span class="position-absolute top-2 start-0 translate-middle badge rounded-pill bg-success my-cart-badge opacity-75">
+            0
+            <span class="visually-hidden">My Carts</span>
+          </span>
         </a>
       </li>
       <!-- Icon -->

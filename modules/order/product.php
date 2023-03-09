@@ -2,9 +2,14 @@
 
 require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'product.inc.php';
+require INCL_PATH . 'cart.inc.php';
 
 $product = new ProductController();
 $productList = $product->displayAllProducts();
+
+$cart = new CartController();
+$cartList = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+$cartCount = count($cartList);
 
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_cust.php';
@@ -82,6 +87,8 @@ require ASSET_PATH . 'sidenav_cust.php';
 
             $(location).attr('href', '<?php echo APP_URL ?>?module=order&action=product_detail&product_id='+product_id);
         });
+
+        $('.my-cart-badge').html('<?php echo $cartCount ?>');
     });
 </script>
 

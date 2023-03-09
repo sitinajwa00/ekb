@@ -11,6 +11,7 @@ $user_detail = $result[0];
 $cart = new CartController();
 $result = $cart->displayAllCartsByUser($_SESSION['user']['id']);
 $cart_list = $result;
+$cartCount = count($cart_list);
 
 $state_arr = array(
     'johor'=>'Johor', 'kedah'=>'Kedah', 'kelantan'=>'Kelantan', 'melaka'=>'Melaka', 'n9'=>'Negeri Sembilan', 'pahang'=>'Pahang', 'perak'=>'Perak',
@@ -152,6 +153,10 @@ if (isset($_POST['updateQty'])) {
 <!--Main layout-->
 
 <script>
+    $(document).ready(function(){
+        $('.my-cart-badge').html('<?php echo $cartCount; ?>');
+    });
+
     $(document).on('change', '.qty', function(){
         var cart_id = $(this).closest('tr').attr('data-cart-id');
         var unit_price = $(this).closest('tr').attr('data-unit-price');
