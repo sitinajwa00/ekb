@@ -5,6 +5,7 @@ if (!defined('APP_PATH')) { define('APP_PATH', ROOT_PATH . 'ekb/'); }
 if (!defined('ASSET_PATH')) { define('ASSET_PATH', APP_PATH . 'assets/'); }
 if (!defined('MOD_PATH')) { define('MOD_PATH', APP_PATH . 'model/'); }
 if (!defined('CTRL_PATH')) { define('CTRL_PATH', APP_PATH . 'controller/'); }
+if (!defined('VIEW_PATH')) { define('VIEW_PATH', APP_PATH . 'view/'); }
 if (!defined('INCL_PATH')) { define('INCL_PATH', APP_PATH . 'includes/'); }
 if (!defined('IMG_PATH')) { define('IMG_PATH', ASSET_PATH . 'images/ekb_img/'); }
 

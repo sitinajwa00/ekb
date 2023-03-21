@@ -23,4 +23,18 @@ $prod_result = $prod->displayAllProducts();
 
 echo json_encode($prod_result);
 
+echo '<br><br>';
+
+$user_view = new UserView();
+$user_view_result = $user_view->viewAllUsers();
+
+echo $user_view_result[0]['userName'];
+
+echo '<br><br>';
+
+$message = new UserView();
+$messageResult = $message->sendErrorMessage();
+
+echo $messageResult;
+
 ?>
