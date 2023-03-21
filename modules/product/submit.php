@@ -15,6 +15,16 @@ if (isset($_POST['submit'])) {
 
     if ($_FILES['image']['error'] === 4) {
         $newImageName = '';
+
+        $product = new AddProductPage();
+        $product->setProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
+
+        echo '<script>
+            alert("Successfully Add New Product");
+            window.location.href = "'.APP_URL.'?module=product";
+        </script>';
+
+
     } else {
         $fileName = $_FILES['image']['name'];
         $fileSize = $_FILES['image']['size'];
@@ -58,7 +68,7 @@ if (isset($_POST['submit'])) {
     if ($_FILES['image']['error'] === 4) {
         $newImageName = $old_image;
 
-        $product = new ProductController();
+        $product = new EditProductPage();
         $product->editProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $old_image);
 
         echo '<script>
@@ -81,7 +91,7 @@ if (isset($_POST['submit'])) {
 
             move_uploaded_file($tempName, IMG_PATH . $newImageName);
             
-            $product = new ProductController();
+            $product = new EditProductPage();
             $product->editProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
 
             echo '<script>

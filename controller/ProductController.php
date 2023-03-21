@@ -21,7 +21,7 @@ class ProductController extends Product {
         $this->insertProduct($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image);
     }
 
-    public function editProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_delivery, $weight, $desc, $image) {
+    public function sendProductDetails($id, $name, $is_cod, $is_pos, $price_cod, $price_delivery, $weight, $desc, $image) {
         $this->updateProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_delivery, $weight, $desc, $image);
     }
 

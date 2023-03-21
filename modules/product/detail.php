@@ -7,9 +7,9 @@ if (!isset($_SESSION['login'])) {
 require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'product.inc.php';
 
-$product = new ProductController();
-$response = $product->displayProduct($_GET['product_id']);
-$detail = $response[0];
+$product = new EditProductPage();
+$response = $product->displayEditProductPage($_GET['product_id']);
+$detail = $response['result'][0];
 
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_admin.php';
