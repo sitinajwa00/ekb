@@ -28,7 +28,7 @@ echo '<br><br>';
 $user_view = new UserView();
 $user_view_result = $user_view->viewAllUsers();
 
-echo $user_view_result[0]['userName'];
+echo json_encode($user_view_result);
 
 echo '<br><br>';
 
