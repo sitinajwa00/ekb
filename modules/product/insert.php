@@ -52,7 +52,7 @@ require ASSET_PATH . 'sidenav_admin.php';
                                     <label for="" class="form-label">Name</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" id="" class="form-control">
+                                    <input type="text" name="name" id="" class="form-control" required>
                                 </div>
                             </div>
 
