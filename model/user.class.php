@@ -49,7 +49,7 @@ class User extends Db {
         return $results;
     }
 
-    protected function insertUser($name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type) {
+    protected function setUserDetails($name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type) {
         $sql = "INSERT INTO users(userName, userPassword, userEmail, userPhonenum, userAddress, userPoscode, userCity, userState, userType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type]);

@@ -36,6 +36,16 @@ require ASSET_PATH . 'header.php';
             $('#email-input').focus();
             return false;
         }
+
+        var email = $('#email-input').val();
+        var a = email.indexOf("@");
+        var b = email.lastIndexOf(".");
+        if(  a < 1 || b < a+2) {
+            alert( "Invalid email address!");
+            $('#email-input').focus();
+            return false;
+        }
+        
         return (true);
     }
 </script>

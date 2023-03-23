@@ -10,47 +10,43 @@ require ASSET_PATH . 'header.php';
         <div class="bg-register-container shadow p-3 bg-white rounded">
             <h3 class="pt-3">Sign Up</h3>
             <hr class="mb-4">
-            <form class="px-2 login-form" action="<?php echo APP_URL ?>?module=auth&action=submit" method="post">
-                <div class="">
-                    <label for="">Email</label>
-                    <input type="text" class="form-control" name="email" placeholder="email@gmail.com" id="">
-                </div>
+            <form class="px-2 login-form" action="<?php echo APP_URL ?>?module=auth&action=submit" method="post" onsubmit="return validate()">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="">Password</label>
-                        <input type="password" class="form-control" name="pwd" placeholder="">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control email" name="email" placeholder="email@gmail.com" id="">
                     </div>
                     <div class="col-md-6">
-                        <label for="">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_pwd" placeholder="">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control pwd" name="pwd" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
+                        <input type="text" class="form-control name" name="name" placeholder="Name">
                     </div>
                     <div class="col-md-6">
                         <label for="">Phone Number</label>
-                        <input type="number" class="form-control" name="phonenum" placeholder="0123456789">
+                        <input type="number" class="form-control phonenum" name="phonenum" placeholder="0123456789">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="address-input">Address:</label>
-                    <input type="text" class="form-control" name="address" placeholder="Address" id="address-input">
+                    <input type="text" class="form-control address" name="address" placeholder="Address" id="address-input">
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="">Poscode</label>
-                        <input type="number" class="form-control" name="poscode" placeholder="12345">
+                        <input type="number" class="form-control poscode" name="poscode" placeholder="12345">
                     </div>
                     <div class="col-md-4">
                         <label for="">City</label>
-                        <input type="text" class="form-control" name="city" placeholder="City">
+                        <input type="text" class="form-control city" name="city" placeholder="City">
                     </div>
                     <div class="col-md-4">
                         <label for="">State</label>
-                        <select name="state" id="" class="form-select">
+                        <select name="state" id="" class="form-select state">
                             <option value="">-- Choose --</option>
                             <option value="johor">Johor</option>
                             <option value="kedah">Kedah</option>
@@ -76,7 +72,27 @@ require ASSET_PATH . 'header.php';
                 </div>
             </form>
         </div>
-        <h6 class="py-3 text-center no-account" >Have already an account? <span><a href="<?php echo APP_URL ?>?module=auth&action=login"> Login</a></span> here</h6>
+        <h6 class="py-3 text-center no-account" >Have already an account? <span><a href="<?php echo APP_URL ?>?module=auth&action=login"> Sign In</a></span> here</h6>
     </div>
 </section>
 <!-- /Register Form -->
+
+<script>
+    function validate() {
+        var email = $('.email').val();
+        var a = email.indexOf("@");
+        var b = email.lastIndexOf(".");
+        if(  email != '' && (a < 1 || b < a+2)) {
+            alert( "Invalid email address!");
+            $('#email-input').focus();
+            return false;
+        }
+
+        if ($('.email').val() == '' || $('.pwd').val() == '' || $('.name').val() == '' || $('.phonenum').val() == '' || $('.address').val() == '' || $('.poscode').val() == '' || $('.city').val() == '' || $('.state').val() == '') {
+            alert('Please complete the form!');
+            return false;
+        }
+        
+        return (true);
+    }
+</script>

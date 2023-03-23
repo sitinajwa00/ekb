@@ -45,15 +45,6 @@ class LoginPage extends UserController {
             }
         }
     }
-    // public function viewAllUsers() {
-    //     $results = $this->displayAllUsers();
-
-    //     $data['message'] = 'Successful';
-    //     $data['status'] = true;
-    //     $data['result'] = $results;
-
-    //     return $data;
-    // }
 }
 
 ?>
