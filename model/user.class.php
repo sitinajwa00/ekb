@@ -19,7 +19,16 @@ class User extends Db {
         return $results;
     }
 
-    protected function getAuthentication($userEmail, $userPassword) {
+    protected function checkEmail($email) {
+        $sql = "SELECT * FROM users WHERE userEmail = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$email]);
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
+    protected function getEmailPass($userEmail, $userPassword) {
         $sql = "SELECT * FROM users WHERE userEmail=:userEmail AND userPassword=:userPassword";
         $stmt = $this->connect()->prepare($sql);
 

@@ -10,7 +10,7 @@ require ASSET_PATH . 'header.php';
             <h3 class="pt-3">Sign In</h3>
             <img class="img-logo" src="<?php echo ASSET_URL ?>/images/default_image.jpg" alt="">
             <hr class="mb-4">
-            <form class="px-2 login-form" action="<?php echo APP_URL ?>?module=auth&action=submit" method="post">
+            <form class="px-2 login-form" action="<?php echo APP_URL ?>?module=auth&action=submit" method="post" onsubmit="return validate()">
                 <div class="form-group">
                     <label for="email-input">Email:</label>
                     <input type="text" class="form-control" name="email" placeholder="Email" id="email-input">
@@ -28,3 +28,14 @@ require ASSET_PATH . 'header.php';
     </div>
 </section>
 <!-- /Login Form -->
+
+<script>
+    function validate() {
+        if ($('#email-input').val() == '' || $('#pass-input').val() == '') {
+            alert('Please complete the login form!');
+            $('#email-input').focus();
+            return false;
+        }
+        return (true);
+    }
+</script>

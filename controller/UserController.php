@@ -21,12 +21,29 @@ class UserController extends User {
         return $response;
     }
 
-    public function userAuth($userEmail, $userPassword) {
-        $results = $this->getAuthentication($userEmail, $userPassword);
-
-        $encode = json_encode($results);
+    public function sendEmailPass($userEmail, $userPassword) {
+        $check_email = $this->checkEmail($userEmail);
+    
+        $encode = json_encode($check_email);
         $response = json_decode($encode, true);
-        return $response;
+        if (count($response) != 0) {
+            $getAuth = $this->getEmailPass($userEmail, $userPassword);
+            $encode = json_encode($getAuth);
+            $response = json_decode($encode, true);
+            $data['message'] = 'valid email';
+            $data['result'] = $response;
+            return $data;
+        } else {
+            $data['message'] = 'invalid email';
+            return $data;
+        }
+
+
+        // $results = $this->getEmailPass($userEmail, $userPassword);
+
+        // $encode = json_encode($results);
+        // $response = json_decode($encode, true);
+        // return $response;
     }
 
     public function displayAllCustomers() {
