@@ -15,13 +15,10 @@ if (isset($_POST['submit'])) {
     $state = $_POST['state'];
     $type = $_SESSION['user']['type'];
 
-    $user = new UserController();
-    $user->editUser($id, $name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type);
+    $profile = new EditProfilePage();
+    $profile->updateProfile($id, $name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type);
 
-    echo '<script>
-        alert("Successfully Update Profile");
-        window.location.href = "'.APP_URL.'?module=profile";
-    </script>';
+    echo $profile;
 }
 
 ?>

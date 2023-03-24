@@ -45,7 +45,8 @@ class ProductPage extends ProductController {
                         targets: 0,
                         orderable: false,
                         render: function (data, type, full, meta) {
-                            return ('<span data-id="'+full['productID']+'"><img class="rounded" src="<?php echo IMG_URL ?>'+data+'" style="width:80px;height:100px;object-fit:cover;"></span>');
+                            var src = (data!='' ? '<?php echo IMG_URL ?>'+data : '<?php echo ASSET_URL . "images/default_image.jpg" ?>')
+                            return ('<span data-id="'+full['productID']+'"><img class="rounded" src="'+src+'" style="width:80px;height:100px;object-fit:cover;"></span>');
                         }
                     },
                     {

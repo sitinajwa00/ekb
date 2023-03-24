@@ -2,9 +2,8 @@
 
 class UserController extends User {
 
-    public function displayUser($userID) {
+    public function getUserDetails($userID) {
         $results = $this->getUser($userID);
-        // echo "Count: " . count($results) .  "Full name: " . $results[0]['demo_user_fname'] . ' ' . $results[0]['demo_user_lname'];
         $encode = json_encode($results);
         $response = json_decode($encode, true);
 
@@ -15,7 +14,7 @@ class UserController extends User {
     public function displayAllUsers() {
         $results = $this->getAllUsers();
         
-        // Encode dulu baru decode
+        // Encode then decode
         $encode = json_encode($results);
         $response = json_decode($encode, true);
         return $response;

@@ -16,6 +16,11 @@ if ($_SESSION['user']['type'] == 0) {
     require ASSET_PATH . 'sidenav_cust.php';
 }
 
+$state = array(
+    'johor'=>'Johor', 'kedah'=>'Kedah', 'kelantan'=>'Kelantan', 'melaka'=>'Melaka', 'n9'=>'Negeri Sembilan', 'pahang'=>'Pahang', 'perak'=>'Perak',
+    'perlis'=>'Perlis', 'pp'=>'Pulau Pinang', 'sabah'=>'Sabah', 'sarawak'=>'Sarawak', 'terengganu'=>'Terengganu', 'kl'=>'W.P. Kuala Lumpur', 'labuan'=>'W.P. Labuan', 'pj'=>'W.P. Putrajaya' 
+);
+
 ?>
 
 <!--Main layout-->
@@ -35,8 +40,8 @@ if ($_SESSION['user']['type'] == 0) {
         </div>
         <!-- BEGIN: Content -->
         <?php
-        $profile = new ProfilePage();
-        echo $profile->displayProfilePage($_SESSION['user']['id']);
+        $profile = new EditProfilePage();
+        echo $profile->displayEditPage($_SESSION['user']['id']);
         ?>
         <!-- END: Content -->
     </div>
