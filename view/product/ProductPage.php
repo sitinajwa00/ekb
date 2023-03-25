@@ -70,7 +70,7 @@ class ProductPage extends ProductController {
                         render: function(data, type, full, meta) {
                             return (
                                 '<div class="d-flex flex-row justify-content-end">' +
-                                    '<a href="<?php echo APP_URL ?>?module=product&action=detail&product_id='+full['productID']+'"><span class="btn btn-outline-warning me-1">Update</span></a>' +
+                                    '<a href="<?php echo APP_URL ?>?module=product&action=update&product_id='+full['productID']+'"><span class="btn btn-outline-warning me-1">Update</span></a>' +
                                     '<span class="btn btn-outline-dark item-delete" data-id="'+full['productID']+'">Delete</span>' +
                                 '</div>'
                             );
@@ -85,7 +85,7 @@ class ProductPage extends ProductController {
                 var product_id = $(this).attr('data-id');
                 var text = 'Are you sure to delete this product?';
                 if (confirm(text) == true) {
-                    $(location).attr('href', '<?php echo APP_URL ?>?module=product&action=submit&product_id='+product_id);
+                    $(location).attr('href', '<?php echo APP_URL ?>?module=product&action=delete&product_id='+product_id);
                 }
             });
         </script>
