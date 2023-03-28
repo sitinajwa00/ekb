@@ -32,7 +32,7 @@
       <?php }?>
       
       <!-- Shopping -->
-      <?php if ($_GET['module'] == 'order') {?>
+      <?php if ($_GET['module'] == 'order' && $_GET['action']!='cart') {?>
       <a
          href="<?php echo APP_URL ?>?module=order&action=product"
          class="list-group-item list-group-item-action py-4 ripple active"
@@ -50,7 +50,7 @@
       </a>
       <?php }?>
       
-      <?php if ($_GET['module'] == 'cart') {?>
+      <?php if ($_GET['module'] == 'order' && $_GET['action']=='cart') {?>
       <a
          href="<?php echo APP_URL ?>?module=cart"
          class="list-group-item list-group-item-action py-4 ripple active"
@@ -60,7 +60,7 @@
       </a>
       <?php } else {?>
         <a
-         href="<?php echo APP_URL ?>?module=cart"
+         href="<?php echo APP_URL ?>?module=order&action=cart"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >

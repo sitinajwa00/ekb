@@ -9,6 +9,14 @@ class CartController extends Cart {
         return $response;
     }
 
+    public function displayCart($cartID) {
+        $results = $this->getCart($cartID);
+        $encode = json_encode($results);
+        $response = json_decode($encode, true);
+
+        return $response;
+    }
+
     public function checkItemInCart($userID, $productID) {
         $results = $this->getItemInCart($userID, $productID);
         $encode = json_encode($results);

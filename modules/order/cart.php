@@ -5,11 +5,11 @@ require INCL_PATH . 'user.inc.php';
 require INCL_PATH . 'cart.inc.php';
 
 $user = new UserController();
-$result = $user->displayUser($_SESSION['user']['id']);
+$result = $user->getUserDetails($_SESSION['user']['id']);
 $user_detail = $result[0];
 
-$cart = new CartController();
-$result = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+$all_cart = new CartController();
+$result = $all_cart->displayAllCartsByUser($_SESSION['user']['id']);
 $cart_list = $result;
 $cartCount = count($cart_list);
 
@@ -40,8 +40,13 @@ if (isset($_POST['updateQty'])) {
     $updateQtyOrder->editQty($cart_id, $order_qty, $total_price);
 
     echo '<script>
-        window.location.href = "' .APP_URL. '?module=cart";
+        window.location.href = "' .APP_URL. '?module=order&action=cart";
     </script>';
+}
+$subtotal = 0;
+function fn_total_price($price) {
+    // $subtotal = $subtotal + $price;
+    return $price + 10;
 }
 
 ?>
@@ -63,6 +68,9 @@ if (isset($_POST['updateQty'])) {
         <!-- BEGIN: Content -->
         <div class="row">
                 <div class="col-8">
+                <div class="alert alert-primary" role="alert">
+                    Tick the selected item.
+                </div>
                     <table class="table">
                         <thead>
                             <tr class="bg-secondary">
@@ -78,7 +86,7 @@ if (isset($_POST['updateQty'])) {
                         <tbody>
                             <?php foreach($cart_list as $val) {?>
                             <tr data-cart-id="<?php echo $val['cartID'] ?>" data-unit-price="<?php echo $val['unit_price'] ?>">
-                                <td data-product-id="<?php echo $val['productID'] ?>"><input type="checkbox" name="" id="" class="form-check-input"></td>
+                                <td data-product-id="<?php echo $val['productID'] ?>"><input type="checkbox" name="cart_checkbox" id="" class="form-check-input"></td>
                                 <td class="col-2"><img src="<?php echo IMG_URL . $val['productImage'] ?>" alt="" class="w-100"></td>
                                 <td><?php echo $val['product_name'] ?><br><small><?php echo ($val['delivery_type']=='cod' ? 'COD' : 'Delivery') ?></small></td>
                                 <td data-price="<?php echo $val['unit_price'] ?>">RM<?php echo $val['unit_price'] ?></td>
@@ -111,33 +119,37 @@ if (isset($_POST['updateQty'])) {
                         </div>
                         <!-- Price Details -->
                         <div class="bg-secondary text-light px-4 py-1"><i class="fa-solid fa-dollar-sign"></i> Price Details</div>
+                        
                         <div class="card-body pt-1">
-
-                            <div class="fw-bold">COD</div>
-                            <?php $cod_count = 0; ?>
-                            <?php foreach ($cart_list as $value) {?>
-                                <?php if ($value['delivery_type'] == 'cod') {?>
-                                <div class="d-flex flex-row justify-content-between">
-                                    <div><?php echo $value['product_name'] ?> x<?php echo $value['order_qty'] ?></div>
-                                    <div><?php echo $value['total_price'] ?></div>
-                                </div>
-                                <?php $cod_count++; } ?>
-                            <?php } ?>
-                            <?php if($cod_count==0)  ?> <div>-</div>
-
-                            <div class="fw-bold">Delivery</div>
-                            <?php foreach ($cart_list as $value) {?>
-                                <?php if ($value['delivery_type'] == 'delivery') {?>
-                                <div class="d-flex flex-row justify-content-between">
-                                    <div><?php echo $value['product_name'] ?> x<?php echo $value['order_qty'] ?></div>
-                                    <div><?php echo $value['total_price'] ?></div>
-                                </div>
+                            <?php $subtotal = 0; ?>
+                            <div class="cod-price-details">
+                                <span class="badge badge-primary">COD</span>
+                                <?php foreach ($cart_list as $value) {?>
+                                    <?php if ($value['delivery_type'] == 'cod') {?>
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div><?php echo $value['product_name'] ?> x<?php echo $value['order_qty'] ?></div>
+                                        <div><?php echo $value['total_price'] ?></div>
+                                    </div>
+                                    <?php $subtotal += $value['total_price'] ?>
+                                    <?php } ?>
                                 <?php } ?>
-                            <?php } ?>
+                            </div>
+                            <div class="pos-price-details">
+                                <span class="badge badge-primary">Delivery</span>
+                                <?php foreach ($cart_list as $value) {?>
+                                    <?php if ($value['delivery_type'] == 'pos') {?>
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div><?php echo $value['product_name'] ?> x<?php echo $value['order_qty'] ?></div>
+                                        <div><?php echo $value['total_price'] ?></div>
+                                    </div>
+                                    <?php $subtotal += $value['total_price'] ?>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
                             <hr>
                             <div class="d-flex flex-row justify-content-between">
                                 <div>Total</div>
-                                <div>RM 29.00</div>
+                                <div>RM <?php echo number_format($subtotal, 2) ?></div>
                             </div>
                             <div class="mt-3 text-end">
                                 <span class="btn btn-dark">Check Out</span>

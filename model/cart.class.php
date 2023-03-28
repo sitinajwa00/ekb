@@ -10,6 +10,15 @@ class Cart extends Db {
         return $results;
     }
 
+    protected function getCart($cartID) {
+        $sql = "SELECT * FROM carts WHERE cartID=$cartID";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
     protected function getItemInCart($userID, $productID) {
         $sql = "SELECT * FROM carts WHERE userID=$userID AND productID=$productID";
         $stmt = $this->connect()->prepare($sql);

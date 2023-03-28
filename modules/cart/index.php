@@ -5,7 +5,7 @@ require INCL_PATH . 'user.inc.php';
 require INCL_PATH . 'cart.inc.php';
 
 $user = new UserController();
-$result = $user->displayUser($_SESSION['user']['id']);
+$result = $user->getUserDetails($_SESSION['user']['id']);
 $user_detail = $result[0];
 
 $cart = new CartController();

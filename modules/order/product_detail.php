@@ -5,7 +5,7 @@ require INCL_PATH . 'product.inc.php';
 require INCL_PATH . 'cart.inc.php';
 
 $product = new ProductController();
-$result = $product->displayProduct($_GET['product_id']);
+$result = $product->getProductDetails($_GET['product_id']);
 $detail = $result[0];
 
 $cart = new CartController();
