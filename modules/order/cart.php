@@ -92,7 +92,7 @@ function fn_total_price($price) {
                                 <td data-price="<?php echo $val['unit_price'] ?>">RM<?php echo $val['unit_price'] ?></td>
                                 <td><input type="number" name="" id="" class="form-control qty" min="0" value="<?php echo $val['order_qty'] ?>"></td>
                                 <td>RM<?php echo $val['total_price'] ?></td>
-                                <td><i class="fa-solid fa-trash"></i></td>
+                                <td><i class="fa-solid fa-trash" onclick="window.location.href='<?php echo APP_URL .'?module=order&action=submit&cart_id='.$val['cartID']?>'"></i></td>
                             </tr>
                             <?php } ?>
                         </tbody>

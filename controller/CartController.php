@@ -32,6 +32,10 @@ class CartController extends Cart {
     public function editQty($cartID, $qty, $total_price) {
         $this->updateQty($cartID, $qty, $total_price);
     }
+
+    public function removeCart($cartID) {
+        $this->deleteCart($cartID);
+    }
 }
 
 ?>

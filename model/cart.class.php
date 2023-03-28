@@ -44,6 +44,12 @@ class Cart extends Db {
 
         $stmt->execute();
     }
+
+    protected function deleteCart($cartID) {
+        $sql = "DELETE from carts WHERE cartID='$cartID'";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+    }
 }
 
 ?>

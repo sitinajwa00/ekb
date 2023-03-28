@@ -47,6 +47,13 @@ if (isset($_POST['add_to_cart'])) {
 
     <?php
     
+} else if (isset($_GET['cart_id'])) {
+    $cart = new CartController();
+    $cart->removeCart($_GET['cart_id']);
+
+    echo '<script>
+        window.location.href = "'.APP_URL.'?module=order&action=cart";
+    </script>';
 }
 
 ?>
