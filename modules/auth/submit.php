@@ -41,6 +41,7 @@ if (isset($_POST['login'])) {
     if (isset($_SESSION['login'])) {
         unset($_SESSION['user']);
         unset($_SESSION['login']);
+        unset($_SESSION['payment']);
     }
     session_destroy();
 

@@ -2,7 +2,7 @@
 
 class Cart extends Db {
     protected function getAllCartsByUser($userID) {
-        $sql = "SELECT * FROM carts,products WHERE userID = $userID AND carts.productID=products.productID ORDER BY delivery_type";
+        $sql = "SELECT * FROM carts,products WHERE userID = $userID AND carts.productID=products.productID AND checkout_status = '0' ORDER BY delivery_type";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
 
@@ -41,6 +41,16 @@ class Cart extends Db {
         $stmt->bindParam(':cartID', $cartID);
         $stmt->bindParam(':order_qty', $qty);
         $stmt->bindParam(':total_price', $total_price);
+
+        $stmt->execute();
+    }
+
+    protected function updateCheckoutStatus($userID, $status) {
+        $sql = "UPDATE carts SET checkout_status=:checkout_status WHERE userID=:userID AND checkout_status = '0'";
+        $stmt = $this->connect()->prepare($sql);
+        
+        $stmt->bindParam(':userID', $userID);
+        $stmt->bindParam(':checkout_status', $status);
 
         $stmt->execute();
     }

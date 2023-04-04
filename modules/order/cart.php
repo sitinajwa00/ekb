@@ -152,7 +152,7 @@ function fn_total_price($price) {
                                 <div>RM <?php echo number_format($subtotal, 2) ?></div>
                             </div>
                             <div class="mt-3 text-end">
-                                <span class="btn btn-dark">Check Out</span>
+                                <span class="btn btn-dark" onclick="window.location.href='<?php echo APP_URL ?>?module=order&action=checkout'">Check Out</span>
                             </div>
                         </div>
                     </div>

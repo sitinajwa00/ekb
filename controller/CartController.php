@@ -33,6 +33,10 @@ class CartController extends Cart {
         $this->updateQty($cartID, $qty, $total_price);
     }
 
+    public function editCheckoutStatus($userID, $checkoutStatus) {
+        $this->updateCheckoutStatus($userID, $checkoutStatus);
+    }
+
     public function removeCart($cartID) {
         $this->deleteCart($cartID);
     }
