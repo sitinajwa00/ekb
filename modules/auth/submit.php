@@ -39,9 +39,10 @@ if (isset($_POST['login'])) {
     // </script>';
 } else if (isset($_GET['id'])) {
     if (isset($_SESSION['login'])) {
-        unset($_SESSION['user']);
-        unset($_SESSION['login']);
-        unset($_SESSION['payment']);
+        unset($_SESSION);
+        // unset($_SESSION['user']);
+        // unset($_SESSION['login']);
+        // unset($_SESSION['payment']);
     }
     session_destroy();
 

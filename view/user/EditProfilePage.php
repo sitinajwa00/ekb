@@ -64,7 +64,7 @@ class EditProfilePage extends UserController {
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (Poscode) -->
                                     <div class="col-md-4">
-                                        <label for="" class="small mb-1">Posocde</label>
+                                        <label for="" class="small mb-1">Poscode</label>
                                         <input type="number" class="form-control poscode" name="poscode" value="<?php echo $detail['userPoscode'] ?>">
                                     </div>
 

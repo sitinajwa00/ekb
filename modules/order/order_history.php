@@ -20,87 +20,37 @@ require ASSET_PATH . 'sidenav_cust.php';
                     </div>
                 </nav>
             </div>
-            <!-- Tabs navs -->
-            <!-- <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link active"
-                    id="ex1-tab-1"
-                    data-mdb-toggle="tab"
-                    href="#ex1-tabs-1"
-                    role="tab"
-                    aria-controls="ex1-tabs-1"
-                    aria-selected="true"
-                    >Tab 1</a
-                >
-                </li>
-                <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="ex1-tab-2"
-                    data-mdb-toggle="tab"
-                    href="#ex1-tabs-2"
-                    role="tab"
-                    aria-controls="ex1-tabs-2"
-                    aria-selected="false"
-                    >Tab 2</a
-                >
-                </li>
-                <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="ex1-tab-3"
-                    data-mdb-toggle="tab"
-                    href="#ex1-tabs-3"
-                    role="tab"
-                    aria-controls="ex1-tabs-3"
-                    aria-selected="false"
-                    >Tab 3</a
-                >
-                </li>
-            </ul> -->
-            <!-- Tabs navs -->
-            
-            <!-- Tabs content -->
-            <!-- <div class="tab-content" id="ex1-content">
-                <div
-                class="tab-pane fade show active"
-                id="ex1-tabs-1"
-                role="tabpanel"
-                aria-labelledby="ex1-tab-1"
-                >
-                Tab 1 content
-                </div>
-                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                Tab 2 content
-                </div>
-                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                Tab 3 content
-                </div>
-            </div> -->
-            <!-- Tabs content -->
 
+            <!-- Tab -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!-- Tab: All -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
                 </li>
+                <!-- Tab: Pending -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">Pending</button>
                 </li>
+                <!-- Tab: Processing -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="processing-tab" data-bs-toggle="tab" data-bs-target="#processing" type="button" role="tab" aria-controls="profile" aria-selected="false">Processing</button>
                 </li>
+                <!-- Tab: Shipping -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="false">To Ship</button>
                 </li>
+                <!-- Tab: Delivery -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab" aria-controls="delivery" aria-selected="false">Out for Delivery</button>
                 </li>
+                <!-- Tab: Complete -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="complete-tab" data-bs-toggle="tab" data-bs-target="#complete" type="button" role="tab" aria-controls="complete" aria-selected="false">Complete</button>
                 </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
+            </ul>
+            <!-- Tab Content -->
+            <div class="tab-content" id="myTabContent">
+                <!-- Tab Content: All -->
                 <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                     <div class="bg-white py-5 container">
                         <div class="bg-light mb-2">
@@ -180,6 +130,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                         </div>
                     </div>
                 </div>
+                <!-- Tab Content: Pending -->
                 <div class="tab-pane fade show" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                     <div class="bg-white py-5 container">
                         <div class="bg-light mb-2">
@@ -234,6 +185,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                         </div>
                     </div>
                 </div>
+                <!-- Tab Content: Processing -->
                 <div class="tab-pane fade" id="processing" role="tabpanel" aria-labelledby="pprocessing-tab">
                     <div class="bg-white py-5 container">
                         <div class="text-center">
@@ -241,10 +193,13 @@ require ASSET_PATH . 'sidenav_cust.php';
                         </div>
                     </div>
                 </div>
+                <!-- Tab Content: Shipping -->
                 <div class="tab-pane fade" id="ship" role="tabpanel" aria-labelledby="ship-tab">To Ship</div>
+                <!-- Tab Content: Delivery -->
                 <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">Out for Delivery</div>
+                <!-- Tab Content: Complete -->
                 <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">Complete</div>
-              </div>
+            </div>
         </div>
     </main>
     <!--Main layout-->

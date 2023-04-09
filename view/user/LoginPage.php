@@ -7,6 +7,21 @@ class LoginPage extends UserController {
 
         echo '<button class="btn-back" onclick="history.back()" hidden>Go Back</button>';
 
+        // Array for state
+        $state_arr = array(
+            'johor'=>'Johor', 'kedah'=>'Kedah', 'kelantan'=>'Kelantan', 'melaka'=>'Melaka', 'n9'=>'Negeri Sembilan', 'pahang'=>'Pahang', 'perak'=>'Perak',
+            'perlis'=>'Perlis', 'pp'=>'Pulau Pinang', 'sabah'=>'Sabah', 'sarawak'=>'Sarawak', 'terengganu'=>'Terengganu', 'kl'=>'W.P. Kuala Lumpur', 'labuan'=>'W.P. Labuan', 'pj'=>'W.P. Putrajaya' 
+        );
+
+        foreach($state_arr as $i=>$val) {
+            if ($result[0]['userState'] == $i) {
+                $state = $val;
+                break;
+            }
+        }
+
+        $address = $result[0]['userAddress'] . ', ' . $result[0]['userPoscode'] . ', ' . $result[0]['userCity'] . ', ' . $state;
+
         if ($response['message'] == 'invalid email') {
             echo '<script>
                 alert("Email does not exist!");
@@ -19,6 +34,7 @@ class LoginPage extends UserController {
                 $_SESSION['user']['name'] = $result[0]['userName'];
                 $_SESSION['user']['pwd'] = $result[0]['userPassword'];
                 $_SESSION['user']['email'] = $result[0]['userEmail'];
+                $_SESSION['user']['address'] = $address;
                 $_SESSION['user']['type'] = $result[0]['userType'];
 
                 if ($_SESSION['user']['type'] == 0) {

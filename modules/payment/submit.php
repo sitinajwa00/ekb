@@ -4,6 +4,7 @@ require_once(APP_PATH . 'vendor/autoload.php');
 require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'payment.inc.php';
 require INCL_PATH . 'cart.inc.php';
+require INCL_PATH . 'order.inc.php';
 
 \Stripe\Stripe::setApiKey('sk_test_51MjBwfA0sa0MTkHNCLDSFy5yO2EktVUIPampYq8KL3WGdvd2mIrSe9ERVobbz7eLcdJDOeVfs5ZDPcSw730J41oR00Mtu5W9Bw');
 
@@ -30,16 +31,43 @@ $charge = \Stripe\Charge::create(array(
     "customer" => $customer->id
 ));
 
+// Detail
 $custID = $_SESSION['user']['id'];
 $chargeID = $charge->id;
 $amount = $charge->amount / 100;
+$address = $_SESSION['user']['address'];
 $status = $charge->status;
 
+// Cart Item
+$cart = new CartController();
+$result = $cart->displayAllCartsByUser($custID);
+
+$item_cod = '';
+$item_pos = '';
+
+foreach ($result as $val) {
+    if ($val['delivery_type'] == 'cod') 
+        $item_cod .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
+    else if ($val['delivery_type'] == 'pos')
+        $item_pos .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
+}
+
+// Payment Database
 $payment = new PaymentController();
 $payment->getPaymentDetails($custID, $chargeID, $amount, $status);
 
-$cart = new CartController;
-$cart->editCheckoutStatus($custID, '1');
+// Order Database
+$order_pos = new OrderController();
+$order_pos->sendOrderDetailsPos($custID, $chargeID, $item_pos, $amount, $address, $status);
+
+if ($_SESSION['cart']['cod'] > 0) {
+    $order_cod = new OrderController();
+    $order_cod->sendOrderDetailsCod($custID, $item_cod, $amount, $address, $status);
+}
+
+// Update Cart Database
+$checkoutStatus = new CartController;
+$checkoutStatus->editCheckoutStatus($custID, '1');
 
 echo '<script>
     alert("Payment Successful");

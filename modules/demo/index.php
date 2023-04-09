@@ -3,6 +3,7 @@
 require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'user.inc.php';
 require INCL_PATH . 'product.inc.php';
+require INCL_PATH . 'cart.inc.php';
 
 // $user = new UserController();
 // $response = $user->displayAllUsers();
@@ -38,11 +39,27 @@ require INCL_PATH . 'product.inc.php';
 
 // echo $messageResult;
 
-echo '<br><br>';
+// echo '<br><br>';
 
-$product = new ProductPage();
-$product_result = $product->displayProductPage();
+// $product = new ProductPage();
+// $product_result = $product->displayProductPage();
 
-echo json_encode($product_result);
+// echo json_encode($product_result);
+
+$cart = new CartController();
+$result = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+
+$item_cod = '';
+$item_pos = '';
+
+foreach ($result as $val) {
+    if ($val['delivery_type'] == 'cod') 
+        $item_cod .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
+    else if ($val['delivery_type'] == 'pos')
+        $item_pos .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
+}
+
+
+echo substr($item_cod, 0, -1);
 
 ?>

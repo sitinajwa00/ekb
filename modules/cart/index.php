@@ -8,27 +8,29 @@ $user = new UserController();
 $result = $user->getUserDetails($_SESSION['user']['id']);
 $user_detail = $result[0];
 
-$cart = new CartController();
-$result = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+$all_cart = new CartController();
+$result = $all_cart->displayAllCartsByUser($_SESSION['user']['id']);
 $cart_list = $result;
+$cartCount = count($cart_list);
 
-$state_arr = array(
-    'johor'=>'Johor', 'kedah'=>'Kedah', 'kelantan'=>'Kelantan', 'melaka'=>'Melaka', 'n9'=>'Negeri Sembilan', 'pahang'=>'Pahang', 'perak'=>'Perak',
-    'perlis'=>'Perlis', 'pp'=>'Pulau Pinang', 'sabah'=>'Sabah', 'sarawak'=>'Sarawak', 'terengganu'=>'Terengganu', 'kl'=>'W.P. Kuala Lumpur', 'labuan'=>'W.P. Labuan', 'pj'=>'W.P. Putrajaya' 
-);
+// Count the number for cod and postage
+$count_cod = 0;
+$count_pos = 0;
 
-foreach($state_arr as $i=>$val) {
-    if ($user_detail['userState'] == $i) {
-        $state = $val;
-        break;
-    }
+foreach ($cart_list as $val) {
+    if ($val['delivery_type'] == 'cod')
+        $count_cod++;
+    else if ($val['delivery_type'] == 'pos')
+        $count_pos++;
 }
 
-$address = $user_detail['userAddress'] . ', ' . $user_detail['userPoscode'] . ', ' . $user_detail['userCity'] . ', ' . $state;
+$_SESSION['cart']['cod'] = $count_cod;
+$_SESSION['cart']['pos'] = $count_pos;
 
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_cust.php';
 
+// Submit form for update quantity
 if (isset($_POST['updateQty'])) {
     $cart_id = $_POST['cart_id'];
     $order_qty = $_POST['order_qty'];
@@ -66,7 +68,6 @@ if (isset($_POST['updateQty'])) {
                         <thead>
                             <tr class="bg-secondary">
                                 <th></th>
-                                <th></th>
                                 <th>Product</th>
                                 <th>Unit Price</th>
                                 <th class="col-2">Quantity</th>
@@ -77,19 +78,18 @@ if (isset($_POST['updateQty'])) {
                         <tbody>
                             <?php foreach($cart_list as $val) {?>
                             <tr data-cart-id="<?php echo $val['cartID'] ?>" data-unit-price="<?php echo $val['unit_price'] ?>">
-                                <td data-product-id="<?php echo $val['productID'] ?>"><input type="checkbox" name="" id="" class="form-check-input"></td>
                                 <td class="col-2"><img src="<?php echo IMG_URL . $val['productImage'] ?>" alt="" class="w-100"></td>
-                                <td><?php echo $val['product_name'] ?><br><small><?php echo ($val['delivery_type']=='cod' ? 'COD' : 'Delivery') ?></small></td>
+                                <td><?php echo $val['product_name'] ?><br><small><?php echo ($val['delivery_type']=='cod' ? 'COD' : 'Postage') ?></small></td>
                                 <td data-price="<?php echo $val['unit_price'] ?>">RM<?php echo $val['unit_price'] ?></td>
                                 <td><input type="number" name="" id="" class="form-control qty" min="0" value="<?php echo $val['order_qty'] ?>"></td>
                                 <td>RM<?php echo $val['total_price'] ?></td>
-                                <td><i class="fa-solid fa-trash"></i></td>
+                                <td><i class="fa-solid fa-trash" onclick="window.location.href='<?php echo APP_URL .'?module=cart&action=submit&cart_id='.$val['cartID']?>'"></i></td>
                             </tr>
                             <?php } ?>
                         </tbody>
                     </table>
                     <div class="text-end">
-                      <a href="<?php echo APP_URL ?>?module=order&action=product"><span class="btn btn-warning">Add Order</span></a>  
+                      <a href="<?php echo APP_URL ?>?module=shopping"><span class="btn btn-warning">Add Order</span></a>  
                     </div>
                     
                 </div>
@@ -105,41 +105,45 @@ if (isset($_POST['updateQty'])) {
                         <div class="card-header bg-secondary text-light px-4 py-1"><i class="fa-solid fa-location-crosshairs"></i> Shipping Address</div>
                         <div class="card-body pt-1">
                           <span class="fw-bold"><small><?php echo $_SESSION['user']['name'] ?></small></span><br>
-                          <span class="user-address"><small><?php echo $address ?></small></span><br>
+                          <span class="user-address"><small><?php echo $_SESSION['user']['address'] ?></small></span><br>
                           <span class="text-warning edit-address" style="cursor:pointer;"><small><i class="fa-regular fa-pen-to-square"></i> Edit Address</span></small>
                         </div>
                         <!-- Price Details -->
                         <div class="bg-secondary text-light px-4 py-1"><i class="fa-solid fa-dollar-sign"></i> Price Details</div>
+                        
                         <div class="card-body pt-1">
-
-                            <div class="fw-bold">COD</div>
-                            <?php $cod_count = 0; ?>
-                            <?php foreach ($cart_list as $value) {?>
-                                <?php if ($value['delivery_type'] == 'cod') {?>
-                                <div class="d-flex flex-row justify-content-between">
-                                    <div><?php echo $value['product_name'] ?> x<?php echo $value['order_qty'] ?></div>
-                                    <div><?php echo $value['total_price'] ?></div>
-                                </div>
-                                <?php $cod_count++; } ?>
-                            <?php } ?>
-                            <?php if($cod_count==0)  ?> <div>-</div>
-
-                            <div class="fw-bold">Delivery</div>
-                            <?php foreach ($cart_list as $value) {?>
-                                <?php if ($value['delivery_type'] == 'delivery') {?>
-                                <div class="d-flex flex-row justify-content-between">
-                                    <div><?php echo $value['product_name'] ?> x<?php echo $value['order_qty'] ?></div>
-                                    <div><?php echo $value['total_price'] ?></div>
-                                </div>
+                            <?php $subtotal = 0; ?>
+                            <div class="cod-price-details" <?php echo ($count_cod == 0 ? 'hidden' : '') ?>>
+                                <span class="badge badge-primary">COD</span>
+                                <?php foreach ($cart_list as $value) {?>
+                                    <?php if ($value['delivery_type'] == 'cod') {?>
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div><?php echo $value['order_qty'] . ' ' . $value['product_name'] ?></div>
+                                        <div><?php echo $value['total_price'] ?></div>
+                                    </div>
+                                    <?php $subtotal += $value['total_price'] ?>
+                                    <?php } ?>
                                 <?php } ?>
-                            <?php } ?>
+                            </div>
+                            <div class="pos-price-details" <?php echo ($count_pos == 0 ? 'hidden' : '') ?>>
+                                <span class="badge badge-primary">Postage</span>
+                                <?php foreach ($cart_list as $value) {?>
+                                    <?php if ($value['delivery_type'] == 'pos') {?>
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div><?php echo $value['order_qty'] . ' ' . $value['product_name'] ?></div>
+                                        <div><?php echo $value['total_price'] ?></div>
+                                    </div>
+                                    <?php $subtotal += $value['total_price'] ?>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
                             <hr>
                             <div class="d-flex flex-row justify-content-between">
                                 <div>Total</div>
-                                <div>RM 29.00</div>
+                                <div>RM <?php echo number_format($subtotal, 2) ?></div>
                             </div>
                             <div class="mt-3 text-end">
-                                <span class="btn btn-dark">Check Out</span>
+                                <button class="btn btn-dark" onclick="window.location.href='<?php echo APP_URL ?>?module=cart&action=checkout'" <?php echo ($cartCount==0 ? 'disabled' : '') ?>>Check Out</button>
                             </div>
                         </div>
                     </div>
@@ -152,6 +156,10 @@ if (isset($_POST['updateQty'])) {
 <!--Main layout-->
 
 <script>
+    $(document).ready(function(){
+        $('.my-cart-badge').html('<?php echo $cartCount; ?>');
+    });
+
     $(document).on('change', '.qty', function(){
         var cart_id = $(this).closest('tr').attr('data-cart-id');
         var unit_price = $(this).closest('tr').attr('data-unit-price');
