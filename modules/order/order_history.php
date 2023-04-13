@@ -1,5 +1,11 @@
 <?php
 
+require INCL_PATH . 'db.inc.php';
+require INCL_PATH . 'order.inc.php';
+
+$order = new OrderController();
+$order_result = $order->displayAllOrders($_SESSION['user']['id']);
+
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_cust.php';
 
@@ -53,7 +59,57 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <!-- Tab Content: All -->
                 <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                     <div class="bg-white py-5 container">
-                        <div class="bg-light mb-2">
+                        <?php 
+                        foreach ($order_result as $val) {
+                            echo '
+                            <div class="bg-light mb-2">
+                                <table class="table align-middle">
+                                    <tbody>
+                                        <tr>
+                                            <td>'.$val['orderStatus'].'</td>
+                                            <td class="text-end">View Details</td>
+                                        </tr>
+                                        <tr>
+                                            <td>'. substr($val['orderItem'], 0, -2) .'</td>
+                                            <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end">
+                                                '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            ';
+                        }
+                        ?>
+                        <!-- <div class="bg-light mb-2">
+                            <table class="table align-middle">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">Out for Delivery</td>
+                                        <td class="text-end">View Details</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-1">
+                                            <img src="img/default_image.jpg" alt="" class="w-100">
+                                        </td>
+                                        <td>
+                                            Original<br>
+                                            x3
+                                        </td>
+                                        <td class="text-end">Rm9.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end">
+                                            Total Order: RM27.00
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+                        <!-- <div class="bg-light mb-2">
                             <table class="table align-middle">
                                 <tbody>
                                     <tr>
@@ -127,7 +183,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- Tab Content: Pending -->

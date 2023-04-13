@@ -50,7 +50,7 @@
       </a>
       
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=order&action=order_history"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >

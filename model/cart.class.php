@@ -20,7 +20,7 @@ class Cart extends Db {
     }
 
     protected function getItemInCart($userID, $productID) {
-        $sql = "SELECT * FROM carts WHERE userID=$userID AND productID=$productID";
+        $sql = "SELECT * FROM carts WHERE userID=$userID AND productID=$productID AND checkout_status = '0'";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
 

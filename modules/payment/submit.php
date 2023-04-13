@@ -35,6 +35,7 @@ $charge = \Stripe\Charge::create(array(
 $custID = $_SESSION['user']['id'];
 $chargeID = $charge->id;
 $amount = $charge->amount / 100;
+$amount_cod = $_SESSION['payment']['cod'];
 $address = $_SESSION['user']['address'];
 $status = $charge->status;
 
@@ -62,7 +63,7 @@ $order_pos->sendOrderDetailsPos($custID, $chargeID, $item_pos, $amount, $address
 
 if ($_SESSION['cart']['cod'] > 0) {
     $order_cod = new OrderController();
-    $order_cod->sendOrderDetailsCod($custID, $item_cod, $amount, $address, $status);
+    $order_cod->sendOrderDetailsCod($custID, $item_cod, $amount_cod, $address, $status);
 }
 
 // Update Cart Database

@@ -25,7 +25,7 @@ if (isset($_GET['cart_id'])) {
 
     // Order Database
     $order_cod = new OrderController();
-    $order_cod->sendOrderDetailsCod($custID, $item_cod, $amount, $_SESSION['user']['address'], $status);
+    $order_cod->sendOrderDetailsCod($custID, $item_cod, $_SESSION['payment']['cod'], $_SESSION['user']['address'], $status);
 
     echo '<script>
         window.location.href = "'.APP_URL.'?module=order&action=order_history";

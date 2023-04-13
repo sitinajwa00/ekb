@@ -1,6 +1,6 @@
 <?php 
 require ASSET_PATH . 'header.php';
-// exit(json_encode($_SESSION));
+// exit(json_encode($_SESSION['payment']['cod']));
 ?>
 
 <!--BEGIN: Content-->
