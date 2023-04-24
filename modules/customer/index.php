@@ -77,8 +77,7 @@ $(document).ready(function () {
         render: function(data, type, full, meta) {
             return (
                 '<div class="d-flex flex-row justify-content-end">' +
-                    '<a href="<?php echo APP_URL ?>?module=customer&action=detail&cust_id='+full['userID']+'"><span class="btn btn-warning me-1">Update</span></a>' +
-                    '<span class="btn btn-danger item-delete" data-id="'+full['userID']+'">Delete</span>' +
+                    '<a href="<?php echo APP_URL ?>?module=customer&action=detail&cust_id='+full['userID']+'"><span class="btn btn-warning me-1">View</span></a>' +
                 '</div>'
             );
         }

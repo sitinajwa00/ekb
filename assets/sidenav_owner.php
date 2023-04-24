@@ -18,8 +18,10 @@
         <i class="fas fa-tachometer-alt fa-fw me-3"></i
           ><span>Main dashboard</span>
       </a>
+
+      <!-- Order List -->
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=order"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >

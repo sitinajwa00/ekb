@@ -10,11 +10,31 @@ class OrderController extends Order {
     }
 
     public function displayAllOrders($custID) {
-        $results = $this->getAllOrders($custID);
+        $results = $this->getAllOrdersByUser($custID);
         $encode = json_encode($results);
         $response = json_decode($encode, true);
 
         return $response;
+    }
+
+    public function displayOrderList() {
+        $results = $this->getAllOrders();
+        $encode = json_encode($results);
+        $response = json_decode($encode, true);
+
+        return $response;
+    }
+
+    public function getOrderDetails($orderID) {
+        $results = $this->getOrder($orderID);
+        $encode = json_encode($results);
+        $response = json_decode($encode, true);
+
+        return $response;
+    }
+
+    public function changeOrderStatus($id, $status) {
+        $this->updateOrderStatus($id, $status);
     }
 }
 

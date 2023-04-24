@@ -8,6 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- Favicon -->
+    <link href="<?php echo APP_URL ?>assets/images/favicon/favicon.png" rel="icon">
+    <link href="<?php echo APP_URL ?>assets/images/favicon/ekb-logo-wt.png" rel="apple-touch-icon">
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->

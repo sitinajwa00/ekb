@@ -41,7 +41,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="processing-tab" data-bs-toggle="tab" data-bs-target="#processing" type="button" role="tab" aria-controls="profile" aria-selected="false">Processing</button>
                 </li>
-                <!-- Tab: Shipping -->
+                <!-- Tab: Ship -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="false">To Ship</button>
                 </li>
@@ -60,13 +60,14 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                     <div class="bg-white py-5 container">
                         <?php 
+                        $count = 0;
                         foreach ($order_result as $val) {
                             echo '
                             <div class="bg-light mb-2">
                                 <table class="table align-middle">
                                     <tbody>
                                         <tr>
-                                            <td>'.$val['orderStatus'].'</td>
+                                            <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
                                             <td class="text-end">View Details</td>
                                         </tr>
                                         <tr>
@@ -83,6 +84,8 @@ require ASSET_PATH . 'sidenav_cust.php';
                             </div>
                             ';
                         }
+                        if ($count == 0)
+                            echo '<div class="text-center"><span>No Order Available</span></div>';
                         ?>
                         <!-- <div class="bg-light mb-2">
                             <table class="table align-middle">
@@ -189,72 +192,179 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <!-- Tab Content: Pending -->
                 <div class="tab-pane fade show" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                     <div class="bg-white py-5 container">
-                        <div class="bg-light mb-2">
-                            <table class="table align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">Pending</td>
-                                        <td class="text-end">View Details</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-1">
-                                            <img src="img/default_image.jpg" alt="" class="w-100">
-                                        </td>
-                                        <td>
-                                            Original<br>
-                                            x3
-                                        </td>
-                                        <td class="text-end">Rm9.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">
-                                            Total Order: RM27.00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="bg-light mb-2">
-                            <table class="table align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">Pending</td>
-                                        <td class="text-end">View Details</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-1">
-                                            <img src="img/default_image.jpg" alt="" class="w-100">
-                                        </td>
-                                        <td>
-                                            Salted Egg<br>
-                                            x2
-                                        </td>
-                                        <td class="text-end">Rm10.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">
-                                            Total Order: RM20.00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php 
+                        $count = 0;
+                        foreach ($order_result as $val) {
+                            if ($val['orderStatus']=='Pending') {
+                                echo '
+                                <div class="bg-light mb-2">
+                                    <table class="table align-middle">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
+                                                <td class="text-end">View Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td>'. substr($val['orderItem'], 0, -2) .'</td>
+                                                <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="text-end">
+                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ';
+                            }
+                        }
+                        if ($count == 0)
+                            echo '<div class="text-center"><span>No Order Available</span></div>';
+                        ?>
                     </div>
                 </div>
                 <!-- Tab Content: Processing -->
-                <div class="tab-pane fade" id="processing" role="tabpanel" aria-labelledby="pprocessing-tab">
+                <div class="tab-pane fade" id="processing" role="tabpanel" aria-labelledby="processing-tab">
                     <div class="bg-white py-5 container">
-                        <div class="text-center">
-                            <h5>No Orders Available</h5>
-                        </div>
+                        <?php 
+                        $count = 0;
+                        foreach ($order_result as $val) {
+                            if ($val['orderStatus']=='Processing') {
+                                echo '
+                                <div class="bg-light mb-2">
+                                    <table class="table align-middle">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
+                                                <td class="text-end">View Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td>'. substr($val['orderItem'], 0, -2) .'</td>
+                                                <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="text-end">
+                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ';
+                            }
+                        }
+                        if ($count == 0)
+                            echo '<div class="text-center"><span>No Order Available</span></div>';
+                        ?>
                     </div>
                 </div>
                 <!-- Tab Content: Shipping -->
-                <div class="tab-pane fade" id="ship" role="tabpanel" aria-labelledby="ship-tab">To Ship</div>
+                <div class="tab-pane fade" id="ship" role="tabpanel" aria-labelledby="ship-tab">
+                    <div class="bg-white py-5 container">
+                        <?php 
+                        $count = 0;
+                        foreach ($order_result as $val) {
+                            if ($val['orderStatus']=='To Ship') {
+                                echo '
+                                <div class="bg-light mb-2">
+                                    <table class="table align-middle">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
+                                                <td class="text-end">View Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td>'. substr($val['orderItem'], 0, -2) .'</td>
+                                                <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="text-end">
+                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ';
+                            }
+                        }
+                        if ($count == 0)
+                            echo '<div class="text-center"><span>No Order Available</span></div>';
+                        ?>
+                    </div>
+                </div>
                 <!-- Tab Content: Delivery -->
-                <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">Out for Delivery</div>
+                <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+                    <div class="bg-white py-5 container">
+                        <?php 
+                        $count = 0;
+                        foreach ($order_result as $val) {
+                            if ($val['orderStatus']=='Out For Delivery') {
+                                echo '
+                                <div class="bg-light mb-2">
+                                    <table class="table align-middle">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
+                                                <td class="text-end">View Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td>'. substr($val['orderItem'], 0, -2) .'</td>
+                                                <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="text-end">
+                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ';
+                            }
+                        }
+                        if ($count == 0)
+                            echo '<div class="text-center"><span>No Order Available</span></div>';
+                        ?>
+                    </div>
+                </div>
                 <!-- Tab Content: Complete -->
-                <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">Complete</div>
+                <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">
+                    <div class="bg-white py-5 container">
+                        <?php 
+                        $count = 0;
+                        foreach ($order_result as $val) {
+                            if ($val['orderStatus']=='Complete') {
+                                echo '
+                                <div class="bg-light mb-2">
+                                    <table class="table align-middle">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
+                                                <td class="text-end">View Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td>'. substr($val['orderItem'], 0, -2) .'</td>
+                                                <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="text-end">
+                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ';
+                                $count++;
+                            }
+                        }
+                        if ($count == 0)
+                            echo '<div class="text-center"><span>No Order Available</span></div>';
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
