@@ -71,7 +71,7 @@
 <!-- Navbar -->
 <nav
      id="main-navbar"
-     class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+     class="navbar navbar-expand-lg navbar-light bg-dark fixed-top"
      >
   <!-- Container wrapper -->
   <div class="container-fluid">
@@ -91,11 +91,12 @@
     <!-- Brand -->
     <a class="navbar-brand" href="#">
       <img
-           src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-           height="25"
-           alt=""
-           loading="lazy"
-           />
+        src="<?php echo IMG_URL ?>ekb-logo-wt.png"
+        height="30"
+        alt=""
+        loading="lazy"
+      />
+      <span class="ms-3 text-warning" style="font-family:'Lato', sans-serif;"><b>EMPAYAR</b> KEREPEK BAWANG</span>
     </a>
 
     <!-- Checking Session -->
@@ -107,7 +108,7 @@
       <!-- Icon -->
       <li class="nav-item">
         <a class="nav-link me-3 me-lg-0 position-relative" href="<?php echo APP_URL ?>?module=order&action=cart">
-          <i class="fa-solid fa-cart-shopping <?php echo ($_GET['module']=='order' && $_GET['action']=='cart' ? 'text-warning' : '') ?>"></i>
+          <i class="fa-solid fa-cart-shopping text-white <?php echo ($_GET['module']=='order' && $_GET['action']=='cart' ? 'text-warning' : '') ?>"></i>
           <span class="position-absolute top-2 start-0 translate-middle badge rounded-pill bg-success my-cart-badge opacity-75">
             0
             <span class="visually-hidden">My Carts</span>
@@ -117,13 +118,13 @@
       <!-- Icon -->
       <li class="nav-item me-3 me-lg-0">
         <a class="nav-link" href="<?php echo APP_URL ?>?module=profile">
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user text-white"></i>
         </a>
       </li>
       <!-- Icon -->
       <li class="nav-item">
         <a class="nav-link me-3 me-lg-0 demo" href="<?php echo APP_URL . '?module=auth&action=submit&id=' . $_SESSION['user']['id'] ?>">
-          <i class="fa-solid fa-right-from-bracket"></i>
+          <i class="fa-solid fa-right-from-bracket text-white"></i>
         </a>
       </li>
     </ul>

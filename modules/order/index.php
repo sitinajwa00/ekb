@@ -60,7 +60,7 @@ $(document).ready(function () {
         { data: 'date' },
         { data: 'userName' },
         { data: 'orderItem' },
-        { data: 'paymentMethod' },
+        { data: 'deliveryType' },
         { data: 'orderStatus' },
         { data: '' }
     ],
@@ -76,13 +76,6 @@ $(document).ready(function () {
             targets: 2,
             render: function (data, type, full, meta) {
                 return (data.slice(0, -2));
-            }
-        },
-        {
-            target: -3,
-            render: function (data, type, full, meta) {
-                var type = data;
-                return(type=='cod' ? 'COD' : 'Postage');
             }
         },
         {

@@ -58,7 +58,7 @@
          <i class="fa-solid fa-boxes-stacked fa-fw me-3"></i><span>Stock</span>
       </a>
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=report"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >

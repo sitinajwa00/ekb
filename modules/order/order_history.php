@@ -76,7 +76,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                         </tr>
                                         <tr>
                                             <td colspan="3" class="text-end">
-                                                '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                             </td>
                                         </tr>
                                     </tbody>
@@ -210,7 +210,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-end">
-                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                    '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -245,7 +245,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-end">
-                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                    '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -280,7 +280,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-end">
-                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                    '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -315,7 +315,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-end">
-                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                    '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -350,7 +350,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-end">
-                                                    '.($val['paymentMethod']=='cod' ? 'Cash On Delivery' : 'Postage').'
+                                                    '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -48,7 +48,7 @@
       <?php }?>
       
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=report"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
@@ -62,7 +62,7 @@
 <!-- Navbar -->
 <nav
      id="main-navbar"
-     class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+     class="navbar navbar-expand-lg navbar-light bg-dark fixed-top"
      >
   <!-- Container wrapper -->
   <div class="container-fluid">
@@ -82,15 +82,16 @@
     <!-- Brand -->
     <a class="navbar-brand" href="#">
       <img
-           src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-           height="25"
-           alt=""
-           loading="lazy"
-           />
+        src="<?php echo IMG_URL ?>ekb-logo-wt.png"
+        height="30"
+        alt=""
+        loading="lazy"
+      />
+      <span class="ms-3 text-warning" style="font-family:'Lato', sans-serif;"><b>EMPAYAR</b> KEREPEK BAWANG</span>
     </a>
 
     <!-- Checking Session -->
-    <span><?php echo (isset($_SESSION['user']) ? $_SESSION['user']['name'] : '') ?></span>
+    <span ><?php echo (isset($_SESSION['user']) ? $_SESSION['user']['name'] : '') ?></span>
 
     <!-- Right links -->
     <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -98,19 +99,19 @@
       <!-- Icon -->
       <li class="nav-item">
         <a class="nav-link me-3 me-lg-0" href="#">
-          <i class="fa-solid fa-cart-shopping"></i>
+          <i class="fa-solid fa-cart-shopping text-white"></i>
         </a>
       </li>
       <!-- Icon -->
       <li class="nav-item me-3 me-lg-0">
         <a class="nav-link" href="<?php echo APP_URL ?>?module=profile">
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user text-white"></i>
         </a>
       </li>
       <!-- Icon -->
       <li class="nav-item">
         <a class="nav-link me-3 me-lg-0" href="<?php echo APP_URL ?>?module=auth&action=submit&id=<?php echo $_SESSION['user']['id'] ?>">
-          <i class="fa-solid fa-right-from-bracket"></i>
+          <i class="fa-solid fa-right-from-bracket text-white"></i>
         </a>
       </li>
     </ul>

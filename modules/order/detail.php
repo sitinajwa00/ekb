@@ -51,16 +51,13 @@ if (isset($_POST['accept'])) {
             </nav>
         </div>
         <!-- BEGIN: Content -->
-        <div class="d-flex justify-content-center">
+        <div class="row">
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body shadow-lg">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-secondary fw-bold text-white">Order Detail</div>
+                    <div class="card-body">
                         <form action="" method="post">
                             <table class="table">
-                                <tr>
-                                    <td>Customer</td>
-                                    <td class="fw-bold"><?php echo $detail['userName'] ?></td>
-                                </tr>
                                 <tr>
                                     <td>Date</td>
                                     <td class="fw-bold"><?php echo $detail['date'] ?></td>
@@ -75,7 +72,7 @@ if (isset($_POST['accept'])) {
                                 </tr>
                                 <tr>
                                     <td>Delivery</td>
-                                    <td class="fw-bold"><?php echo ($detail['paymentMethod']=='cod' ? 'Cash On Delivery (COD)' : 'Postage') ?></td>
+                                    <td class="fw-bold"><?php echo $detail['deliveryType'] ?></td>
                                 </tr>
                                 <?php  
                                 if ($detail['orderStatus'] != 'Pending') {
@@ -105,6 +102,27 @@ if (isset($_POST['accept'])) {
                 </div>
                 <div class="text-end mt-2">
                     <button class="btn btn-primary" onclick="window.location.href='<?php echo APP_URL ?>?module=order'">Order List&emsp;<i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-secondary fw-bold text-white">Customer Detail</div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>Name</td>
+                                <td class="fw-bold"><?php echo $detail['userName'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td class="fw-bold"><?php echo $detail['userPhonenum'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td class="fw-bold"><?php echo $detail['shippingAddress'] ?></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

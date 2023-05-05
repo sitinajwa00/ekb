@@ -13,14 +13,16 @@ class LoginPage extends UserController {
             'perlis'=>'Perlis', 'pp'=>'Pulau Pinang', 'sabah'=>'Sabah', 'sarawak'=>'Sarawak', 'terengganu'=>'Terengganu', 'kl'=>'W.P. Kuala Lumpur', 'labuan'=>'W.P. Labuan', 'pj'=>'W.P. Putrajaya' 
         );
 
-        foreach($state_arr as $i=>$val) {
-            if ($result[0]['userState'] == $i) {
-                $state = $val;
-                break;
+        if (count($result) > 0) {
+            foreach($state_arr as $i=>$val) {
+                if ($result[0]['userState'] == $i) {
+                    $state = $val;
+                    break;
+                }
             }
-        }
 
-        $address = $result[0]['userAddress'] . ', ' . $result[0]['userPoscode'] . ', ' . $result[0]['userCity'] . ', ' . $state;
+            $address = $result[0]['userAddress'] . ', ' . $result[0]['userPoscode'] . ', ' . $result[0]['userCity'] . ', ' . $state;
+        }
 
         if ($response['message'] == 'invalid email') {
             echo '<script>

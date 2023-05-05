@@ -4,6 +4,7 @@ require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'user.inc.php';
 require INCL_PATH . 'product.inc.php';
 require INCL_PATH . 'cart.inc.php';
+require INCL_PATH . 'report.inc.php';
 
 // $user = new UserController();
 // $response = $user->displayAllUsers();
@@ -61,5 +62,15 @@ foreach ($result as $val) {
 
 
 echo substr($item_cod, 0, -1);
+
+// $report = new ReportController();
+// $result = $report->displayTotalSalesByMonth('COD');
+
+// echo json_encode($result);
+
+$report = new ReportController();
+$result = $report->displayTotalSalesDailyByMonth('COD', 4, 2023);
+
+echo json_encode($result);
 
 ?>

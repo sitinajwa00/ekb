@@ -87,13 +87,13 @@ require ASSET_PATH . 'sidenav_cust.php';
                                 <label for="" class="label-form">Delivery Type:</label>
                             </div>
                             <div class="mb-3 col-8">
-                                <div class="form-check">
+                                <div class="form-check" <?php echo ($detail['is_pos'] == 0 ? 'hidden' : '') ?>>
                                     <input class="form-check-input" type="radio" name="delivery_type" id="radio1" value="pos" checked>
                                     <label class="form-check-label" for="radio1">
                                         Postage
                                     </label>
                                 </div>
-                                <div class="form-check">
+                                <div class="form-check" <?php echo ($detail['is_cod'] == 0 ? 'hidden' : '') ?>>
                                     <input class="form-check-input" type="radio" name="delivery_type" value="cod" id="radio2">
                                     <label class="form-check-label" for="radio2">
                                         Cash On Delivery
