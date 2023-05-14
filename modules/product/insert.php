@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
 
     $name = $_POST['name'];
     $desc = (isset($_POST['description']) ? $_POST['description'] : '');
+    $qty = $_POST['quantity'];
     $weight = (isset($_POST['weight']) ? $_POST['weight'] : 'no');
     $is_cod = (isset($_POST['is_cod']) ? $_POST['is_cod'] : '0');
     $is_pos = (isset($_POST['is_pos']) ? $_POST['is_pos'] : '0');
@@ -20,7 +21,7 @@ if (isset($_POST['submit'])) {
         $newImageName = '';
 
         $product = new AddProductPage();
-        $product->enterProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
+        $product->enterProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName, $qty);
 
         echo '<script>
             alert("Successfully Add New Product");
@@ -45,7 +46,7 @@ if (isset($_POST['submit'])) {
             move_uploaded_file($tempName, IMG_PATH . $newImageName);
             
             $product = new AddProductPage();
-            $product->enterProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
+            $product->enterProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName, $qty);
 
             echo '<script>
                 alert("Successfully Add New Product");

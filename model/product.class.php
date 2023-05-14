@@ -19,10 +19,10 @@ class Product extends Db {
         return $results;
     }
 
-    protected function setProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $image) {
-        $sql = "INSERT INTO products (productName, is_cod, is_pos, productPriceCOD, productPricePos, productWeight, productDesc, productImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    protected function setProductDetails($name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $image, $qty) {
+        $sql = "INSERT INTO products (productName, is_cod, is_pos, productPriceCOD, productPricePos, productWeight, productDesc, productImage, productQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $image]);
+        $stmt->execute([$name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $image, $qty]);
     }
 
     protected function updateProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $image) {

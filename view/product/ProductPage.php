@@ -19,7 +19,7 @@ class ProductPage extends ProductController {
                 <th class="service">Service</th>
                 <th>Price (COD)</th>
                 <th>Price (Postage)</th>
-                <th>Weight</th>
+                <th>Weight (g)</th>
                 <th class="text-end">Action</th>
               </tr>
             </thead>

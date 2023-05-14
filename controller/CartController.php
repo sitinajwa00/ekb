@@ -37,8 +37,12 @@ class CartController extends Cart {
         $this->updateCheckoutStatus($userID, $checkoutStatus);
     }
 
-    public function removeCart($cartID) {
-        $this->deleteCart($cartID);
+    public function removeCart($userID) {
+        $this->deleteCart($userID);
+    }
+
+    public function removeCartById($cartID) {
+        $this->deleteCartById($cartID);
     }
 }
 

@@ -10,7 +10,10 @@ $report = new ReportController();
 $result_pos = $report->displayTotalSalesDaily('Postage');
 
 require ASSET_PATH . 'header.php';
-require ASSET_PATH . 'sidenav_owner.php';
+if ($_SESSION['user']['type'] == 0)
+    require ASSET_PATH . 'sidenav_owner.php';
+else if ($_SESSION['user']['type'] == 1) 
+    require ASSET_PATH . 'sidenav_admin.php';
 
 if (isset($_POST['filter_cod']) && isset($_GET['filter'])) {
     $year = $_POST['datepickerCOD'];
@@ -46,7 +49,7 @@ if (isset($_POST['filter_cod']) && isset($_GET['filter'])) {
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=report">Sales Report</a></li>
-                        <li class="breadcrumb-item">Sales Report Daily</li>
+                        <li class="breadcrumb-item">Daily Sales Report</li>
                     </ol>
                     </nav>
                 </div>
@@ -243,7 +246,7 @@ $(document).ready(function () {
             }
                 
         ],
-        dom: '<"card-header border-bottom p-2"<"head-label head-label-pos"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 my-2 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
+        dom: '<"card-header border-bottom p-2"<"head-label head-label-pos"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 my-2 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
     });
 
     $(function(){

@@ -50,7 +50,7 @@ if (isset($_POST['save'])) {
             move_uploaded_file($tempName, IMG_PATH . $newImageName);
             
             $product = new EditProductPage();
-            $product->updateProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
+            $product->editProduct($id, $name, $is_cod, $is_pos, $price_cod, $price_pos, $weight, $desc, $newImageName);
 
             echo '<script>
                 alert("Successfully Update Product");

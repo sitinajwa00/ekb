@@ -48,12 +48,16 @@ class EditProductPage extends ProductController {
                                 </div>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="weight" id="weight400" value="400" <?php echo ($detail['productWeight']=='400' ? 'checked' : '') ?>>
+                                        <label class="form-check-label" for="weight400">400g</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="weight" id="weight500" value="500" <?php echo ($detail['productWeight']=='500' ? 'checked' : '') ?>>
                                         <label class="form-check-label" for="weight500">500g</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="weight" id="weight1000" value="1000" <?php echo ($detail['productWeight']=='1000' ? 'checked' : '') ?>>
-                                        <label class="form-check-label" for="weight1000">1kg</label>
+                                        <input class="form-check-input" type="radio" name="weight" id="weight5000" value="5000" <?php echo ($detail['productWeight']=='5000' ? 'checked' : '') ?>>
+                                        <label class="form-check-label" for="weight5000">5kg</label>
                                     </div>
                                 </div>
                                 

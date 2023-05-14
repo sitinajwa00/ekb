@@ -10,7 +10,10 @@ $report = new ReportController();
 $result_pos = $report->displayTotalSalesByMonth('Postage');
 
 require ASSET_PATH . 'header.php';
-require ASSET_PATH . 'sidenav_owner.php';
+if ($_SESSION['user']['type'] == 0)
+    require ASSET_PATH . 'sidenav_owner.php';
+else if ($_SESSION['user']['type'] == 1) 
+    require ASSET_PATH . 'sidenav_admin.php';
 
 ?>
 
@@ -24,7 +27,7 @@ require ASSET_PATH . 'sidenav_owner.php';
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=report">Sales Report</a></li>
-                        <li class="breadcrumb-item">Sales Report Monthly</li>
+                        <li class="breadcrumb-item">Monthly Sales Report</li>
                     </ol>
                     </nav>
                 </div>

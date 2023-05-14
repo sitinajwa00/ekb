@@ -6,7 +6,7 @@ require INCL_PATH . 'order.inc.php';
 
 if (isset($_GET['cart_id'])) {
     $cart = new CartController();
-    $cart->removeCart($_GET['cart_id']);
+    $cart->removeCartById($_GET['cart_id']);
 
     echo '<script>
         window.location.href = "'.APP_URL.'?module=cart";
@@ -24,10 +24,21 @@ if (isset($_GET['cart_id'])) {
     }
 
     // Order Database
+    $custID = $_SESSION['user']['id'];
+    $status = '';
     $order_cod = new OrderController();
     $order_cod->sendOrderDetailsCod($custID, $item_cod, $_SESSION['payment']['cod'], $_SESSION['user']['address'], $status);
 
+    // Update Cart Database
+    $checkoutStatus = new CartController;
+    $checkoutStatus->editCheckoutStatus($custID, '1');
+
+    // Remove Cart from database
+    $removeCart = new CartController;
+    $removeCart->removeCart($custID);
+
     echo '<script>
+        alert("Redirect to Order History");
         window.location.href = "'.APP_URL.'?module=order&action=order_history";
     </script>';
 }

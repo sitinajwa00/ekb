@@ -44,15 +44,28 @@ class AddProductPage extends ProductController {
                                 </div>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="weight" id="weight400" value="400">
+                                        <label class="form-check-label" for="weight400">400g</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="weight" id="weight500" value="500">
                                         <label class="form-check-label" for="weight500">500g</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="weight" id="weight1000" value="1000">
-                                        <label class="form-check-label" for="weight1000">1kg</label>
+                                        <input class="form-check-input" type="radio" name="weight" id="weight5000" value="5000">
+                                        <label class="form-check-label" for="weight5000">5kg</label>
                                     </div>
                                 </div>
-                                
+                            </div>
+
+                            <!-- Stock -->
+                            <div class="row mb-3">
+                                <div class="col-sm-2">
+                                    <label for="" class="form-label">Quantity</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="number" name="quantity" id="" class="form-control qty" min="0">
+                                </div>
                             </div>
 
                             <!-- Description -->
@@ -135,7 +148,7 @@ class AddProductPage extends ProductController {
             });
 
             function validate() {
-                if ($('.name').val()=='' || $('.cod-price').val()=='' || $('.pos-price').val()=='') {
+                if ($('.name').val()=='' || $('.qty').val()=='' || $('.cod-price').val()=='' || $('.pos-price').val()=='') {
                     alert('Please complete the form!');
                     return false;
                 }
@@ -153,8 +166,8 @@ class AddProductPage extends ProductController {
         <?php
     }
 
-    public function enterProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image) {
-        $this->sendProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image);
+    public function enterProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image, $qty) {
+        $this->sendProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image, $qty);
     }
 }
 

@@ -14,7 +14,7 @@ class Order extends Db {
     }
 
     protected function getAllOrdersByUser($custID) {
-        $sql = "SELECT * FROM orders WHERE custID=$custID";
+        $sql = "SELECT * FROM orders WHERE custID=$custID ORDER BY date DESC";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
 

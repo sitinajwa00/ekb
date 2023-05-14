@@ -51,7 +51,7 @@
       <?php }?>
       
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=stock"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >

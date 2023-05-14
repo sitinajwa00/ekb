@@ -17,8 +17,8 @@ class ProductController extends Product {
         return $response;
     }
 
-    public function sendProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image) {
-        $this->setProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image);
+    public function sendProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image, $qty) {
+        $this->setProductDetails($name, $is_cod, $is_pos, $price_cod, $price_dvry, $weight, $desc, $image, $qty);
     }
 
     public function updateProductDetails($id, $name, $is_cod, $is_pos, $price_cod, $price_delivery, $weight, $desc, $image) {

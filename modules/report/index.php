@@ -21,7 +21,10 @@ $report = new ReportController();
 $result_tsm_cod = $report->displayTotalSalesByMonth('COD');
 
 require ASSET_PATH . 'header.php';
-require ASSET_PATH . 'sidenav_owner.php';
+if ($_SESSION['user']['type'] == 0)
+    require ASSET_PATH . 'sidenav_owner.php';
+else if ($_SESSION['user']['type'] == 1) 
+    require ASSET_PATH . 'sidenav_admin.php';
 
 ?>
 
@@ -45,13 +48,13 @@ require ASSET_PATH . 'sidenav_owner.php';
             <div class="card col-5 me-2">
                 <div class="card-body d-flex flex-column justify-content-between" onclick="window.location.href='<?php echo APP_URL ?>?module=report&action=daily'" style="cursor:pointer;">
                     <img src="<?php echo ASSET_URL ?>/images/freepik/charts.jpg" alt="" class="w-100">
-                    <button class="btn btn-dark w-100">Sales Report Daily</button>
+                    <button class="btn btn-dark w-100">Daily Sales Report</button>
                 </div>
             </div>
             <div class="card col-5">
                 <div class="card-body text-center" onclick="window.location.href='<?php echo APP_URL ?>?module=report&action=monthly'" style="cursor:pointer;">
                     <img src="<?php echo ASSET_URL ?>/images/freepik/dividend.jpg" alt="" class="w-75">
-                    <button class="btn btn-dark w-100">Sales Report Monthly</button>
+                    <button class="btn btn-dark w-100">Monthly Sales Report</button>
                 </div>
             </div>
         </div>

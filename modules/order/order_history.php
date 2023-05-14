@@ -6,6 +6,8 @@ require INCL_PATH . 'order.inc.php';
 $order = new OrderController();
 $order_result = $order->displayAllOrders($_SESSION['user']['id']);
 
+// exit(json_encode($order_result));
+
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_cust.php';
 
@@ -30,12 +32,12 @@ require ASSET_PATH . 'sidenav_cust.php';
             <!-- Tab -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <!-- Tab: All -->
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
-                </li>
+                </li> -->
                 <!-- Tab: Pending -->
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">Pending</button>
+                  <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">Pending</button>
                 </li>
                 <!-- Tab: Processing -->
                 <li class="nav-item" role="presentation">
@@ -57,140 +59,8 @@ require ASSET_PATH . 'sidenav_cust.php';
             <!-- Tab Content -->
             <div class="tab-content" id="myTabContent">
                 <!-- Tab Content: All -->
-                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                    <div class="bg-white py-5 container">
-                        <?php 
-                        $count = 0;
-                        foreach ($order_result as $val) {
-                            echo '
-                            <div class="bg-light mb-2">
-                                <table class="table align-middle">
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
-                                            <td class="text-end">View Details</td>
-                                        </tr>
-                                        <tr>
-                                            <td>'. substr($val['orderItem'], 0, -2) .'</td>
-                                            <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3" class="text-end">
-                                                '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            ';
-                        }
-                        if ($count == 0)
-                            echo '<div class="text-center"><span>No Order Available</span></div>';
-                        ?>
-                        <!-- <div class="bg-light mb-2">
-                            <table class="table align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">Out for Delivery</td>
-                                        <td class="text-end">View Details</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-1">
-                                            <img src="img/default_image.jpg" alt="" class="w-100">
-                                        </td>
-                                        <td>
-                                            Original<br>
-                                            x3
-                                        </td>
-                                        <td class="text-end">Rm9.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">
-                                            Total Order: RM27.00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
-                        <!-- <div class="bg-light mb-2">
-                            <table class="table align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">Out for Delivery</td>
-                                        <td class="text-end">View Details</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-1">
-                                            <img src="img/default_image.jpg" alt="" class="w-100">
-                                        </td>
-                                        <td>
-                                            Original<br>
-                                            x3
-                                        </td>
-                                        <td class="text-end">Rm9.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">
-                                            Total Order: RM27.00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="bg-light mb-2">
-                            <table class="table align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">Complete</td>
-                                        <td class="text-end">View Details</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-1">
-                                            <img src="img/default_image.jpg" alt="" class="w-100">
-                                        </td>
-                                        <td>
-                                            Salted Egg<br>
-                                            x2
-                                        </td>
-                                        <td class="text-end">Rm10.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">
-                                            Total Order: RM20.00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="bg-light mb-2">
-                            <table class="table align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">Complete</td>
-                                        <td class="text-end">View Details</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-1">
-                                            <img src="img/default_image.jpg" alt="" class="w-100">
-                                        </td>
-                                        <td>
-                                            Original<br>
-                                            x3
-                                        </td>
-                                        <td class="text-end">Rm9.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-end">
-                                            Total Order: RM27.00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
-                    </div>
-                </div>
                 <!-- Tab Content: Pending -->
-                <div class="tab-pane fade show" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                     <div class="bg-white py-5 container">
                         <?php 
                         $count = 0;
@@ -209,7 +79,10 @@ require ASSET_PATH . 'sidenav_cust.php';
                                                 <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" class="text-end">
+                                                <td>
+                                                    <i>Date: '.date('d M Y', strtotime($val['date'])).'</i>
+                                                </td>
+                                                <td class="text-end">
                                                     '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
@@ -217,6 +90,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                     </table>
                                 </div>
                                 ';
+                                $count++;
                             }
                         }
                         if ($count == 0)
@@ -244,7 +118,10 @@ require ASSET_PATH . 'sidenav_cust.php';
                                                 <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" class="text-end">
+                                                <td>
+                                                    <i>Date: '.date('d M Y', strtotime($val['date'])).'</i>
+                                                </td>
+                                                <td class="text-end">
                                                     '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
@@ -252,6 +129,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                     </table>
                                 </div>
                                 ';
+                                $count++;
                             }
                         }
                         if ($count == 0)
@@ -279,7 +157,10 @@ require ASSET_PATH . 'sidenav_cust.php';
                                                 <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" class="text-end">
+                                                <td>
+                                                    <i>Date: '.date('d M Y', strtotime($val['date'])).'</i>
+                                                </td>
+                                                <td class="text-end">
                                                     '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
@@ -287,6 +168,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                     </table>
                                 </div>
                                 ';
+                                $count++;
                             }
                         }
                         if ($count == 0)
@@ -314,7 +196,10 @@ require ASSET_PATH . 'sidenav_cust.php';
                                                 <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" class="text-end">
+                                                <td>
+                                                    <i>Date: '.date('d M Y', strtotime($val['date'])).'</i>
+                                                </td>
+                                                <td class="text-end">
                                                     '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>
@@ -322,6 +207,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                     </table>
                                 </div>
                                 ';
+                                $count++;
                             }
                         }
                         if ($count == 0)
@@ -349,7 +235,10 @@ require ASSET_PATH . 'sidenav_cust.php';
                                                 <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" class="text-end">
+                                                <td>
+                                                    <i>Date: '.date('d M Y', strtotime($val['date'])).'</i>
+                                                </td>
+                                                <td class="text-end">
                                                     '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
                                                 </td>
                                             </tr>

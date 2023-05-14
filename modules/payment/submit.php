@@ -70,6 +70,10 @@ if ($_SESSION['cart']['cod'] > 0) {
 $checkoutStatus = new CartController;
 $checkoutStatus->editCheckoutStatus($custID, '1');
 
+// Remove Cart from database
+$removeCart = new CartController;
+$removeCart->removeCart($custID);
+
 echo '<script>
     alert("Payment Successful");
     window.location.href = "'.APP_URL.'?module=payment&action=complete";
