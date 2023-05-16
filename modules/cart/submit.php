@@ -3,6 +3,7 @@
 require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'cart.inc.php';
 require INCL_PATH . 'order.inc.php';
+require INCL_PATH . 'product.inc.php';
 
 if (isset($_GET['cart_id'])) {
     $cart = new CartController();
@@ -28,6 +29,12 @@ if (isset($_GET['cart_id'])) {
     $status = '';
     $order_cod = new OrderController();
     $order_cod->sendOrderDetailsCod($custID, $item_cod, $_SESSION['payment']['cod'], $_SESSION['user']['address'], $status);
+
+    // Update Product Database
+    foreach ($result as $val) {
+        $updateQty = new ProductController();
+        $updateQty->updateQty($val['productID'], parseInt($val['order_qty']));
+    }
 
     // Update Cart Database
     $checkoutStatus = new CartController;

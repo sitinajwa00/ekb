@@ -73,6 +73,12 @@ $(document).ready(function () {
             }
         },
         {
+            targets: -2,
+            render: function(data, type, full, meta) {
+                return (data<=10 ? '<span class="text-danger">'+data+'</span>' : data);
+            }
+        },
+        {
             targets: -1,
             render: function(data, type, full, meta) {
                 return (

@@ -56,6 +56,18 @@ class Product extends Db {
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
     }
+
+    protected function addProductQty($product_id, $qty) {
+        $sql = "UPDATE products SET productQty=productQty + ? WHERE productID=?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$qty, $product_id]);
+    }
+
+    protected function updateProductQty($product_id, $qty) {
+        $sql = "UPDATE products SET productQty=productQty - ? WHERE productID=?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$qty, $product_id]);
+    }
 }
 
 ?>

@@ -5,6 +5,7 @@ require INCL_PATH . 'db.inc.php';
 require INCL_PATH . 'payment.inc.php';
 require INCL_PATH . 'cart.inc.php';
 require INCL_PATH . 'order.inc.php';
+require INCL_PATH . 'product.inc.php';
 
 \Stripe\Stripe::setApiKey('sk_test_51MjBwfA0sa0MTkHNCLDSFy5yO2EktVUIPampYq8KL3WGdvd2mIrSe9ERVobbz7eLcdJDOeVfs5ZDPcSw730J41oR00Mtu5W9Bw');
 
@@ -35,7 +36,7 @@ $charge = \Stripe\Charge::create(array(
 $custID = $_SESSION['user']['id'];
 $chargeID = $charge->id;
 $amount = $charge->amount / 100;
-$amount_cod = $_SESSION['payment']['cod'];
+$amount_cod = (isset($_SESSION['payment']['cod']) ? $_SESSION['payment']['cod'] : 0);
 $address = $_SESSION['user']['address'];
 $status = $charge->status;
 
@@ -66,12 +67,18 @@ if ($_SESSION['cart']['cod'] > 0) {
     $order_cod->sendOrderDetailsCod($custID, $item_cod, $amount_cod, $address, $status);
 }
 
+// Update Product Database
+foreach ($result as $val) {
+    $updateQty = new ProductController();
+    $updateQty->updateQty($val['productID'], (int)$val['order_qty']);
+}
+
 // Update Cart Database
-$checkoutStatus = new CartController;
+$checkoutStatus = new CartController();
 $checkoutStatus->editCheckoutStatus($custID, '1');
 
 // Remove Cart from database
-$removeCart = new CartController;
+$removeCart = new CartController();
 $removeCart->removeCart($custID);
 
 echo '<script>

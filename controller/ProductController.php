@@ -28,6 +28,14 @@ class ProductController extends Product {
     public function removeProduct($productID) {
         $this->deleteProduct($productID);
     }
+
+    public function addQty($product_id, $qty) {
+        $this->addProductQty($product_id, $qty);
+    }
+
+    public function updateQty($product_id, $qty) {
+        $this->updateProductQty($product_id, $qty);
+    }
 }
 
 ?>

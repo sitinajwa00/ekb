@@ -47,30 +47,35 @@ require INCL_PATH . 'report.inc.php';
 
 // echo json_encode($product_result);
 
-$cart = new CartController();
-$result = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+// $cart = new CartController();
+// $result = $cart->displayAllCartsByUser($_SESSION['user']['id']);
 
-$item_cod = '';
-$item_pos = '';
+// $item_cod = '';
+// $item_pos = '';
 
-foreach ($result as $val) {
-    if ($val['delivery_type'] == 'cod') 
-        $item_cod .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
-    else if ($val['delivery_type'] == 'pos')
-        $item_pos .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
-}
+// foreach ($result as $val) {
+//     if ($val['delivery_type'] == 'cod') 
+//         $item_cod .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
+//     else if ($val['delivery_type'] == 'pos')
+//         $item_pos .= $val['product_name'] . '(' . $val['order_qty'] . '), ' ;
+// }
 
 
-echo substr($item_cod, 0, -1);
+// echo substr($item_cod, 0, -1);
 
 // $report = new ReportController();
 // $result = $report->displayTotalSalesByMonth('COD');
 
 // echo json_encode($result);
 
-$report = new ReportController();
-$result = $report->displayTotalSalesDailyByMonth('COD', 4, 2023);
+// $report = new ReportController();
+// $result = $report->displayTotalSalesDailyByMonth('COD', 4, 2023);
 
-echo json_encode($result);
+// echo json_encode($result);
+
+$updateQty = new ProductController();
+$updateQty->updateQty('23', 3);
+
+echo 'check db';
 
 ?>
