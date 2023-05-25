@@ -13,8 +13,32 @@ class Order extends Db {
         $stmt->execute([$custID, 'COD', $item, $amount, $shipAddress, 'Pending']);
     }
 
+    protected function getOrderID($custID) {
+        $sql = "SELECT orderID FROM orders WHERE custID=$custID ORDER BY orderID DESC LIMIT 1";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
+    protected function sendOrderItems($orderID, $productName, $qty, $totalPrice, $type) {
+        $sql = "INSERT INTO order_items(order_id, product_name, qty, total_price, delivery_type) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$orderID, $productName, $qty, $totalPrice, $type]);
+    }
+
     protected function getAllOrdersByUser($custID) {
         $sql = "SELECT * FROM orders WHERE custID=$custID ORDER BY date DESC";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
+    protected function getAllItemsByOrderID($orderID) {
+        $sql = "SELECT * FROM order_items WHERE order_id=$orderID";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
 

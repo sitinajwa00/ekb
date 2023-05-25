@@ -4,6 +4,8 @@ class LoginPage extends UserController {
     public function enterEmailPass($email, $pass) {
         $response = $this->sendEmailPass($email, $pass);
         $result = $response['result'];
+        // echo json_encode($response);
+        // echo count($result);exit;
 
         echo '<button class="btn-back" onclick="history.back()" hidden>Go Back</button>';
 
@@ -13,7 +15,7 @@ class LoginPage extends UserController {
             'perlis'=>'Perlis', 'pp'=>'Pulau Pinang', 'sabah'=>'Sabah', 'sarawak'=>'Sarawak', 'terengganu'=>'Terengganu', 'kl'=>'W.P. Kuala Lumpur', 'labuan'=>'W.P. Labuan', 'pj'=>'W.P. Putrajaya' 
         );
 
-        if (count($result) > 0) {
+        if ($response['message'] == 'valid email' && count($result) > 0) {
             foreach($state_arr as $i=>$val) {
                 if ($result[0]['userState'] == $i) {
                     $state = $val;

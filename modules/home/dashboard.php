@@ -9,6 +9,21 @@ if (isset($_SESSION['login']) && $_SESSION['user']['type'] == 0) {
     require ASSET_PATH . 'sidenav.php';
 }
 
+require INCL_PATH . 'db.inc.php';
+require INCL_PATH . 'dashboard.inc.php';
+
+$tot_sales = new DashboardController();
+$tot_sales = $tot_sales->displayTotalSales();
+
+$tot_prod_sold = new DashboardController();
+$tot_prod_sold = $tot_prod_sold->displayTotalProductSold();
+
+$tot_pending = new DashboardController();
+$tot_pending = $tot_pending->displayTotalPendingOrder();
+
+$tot_cust = new DashboardController();
+$tot_cust = $tot_cust->displayTotalCustomer();
+
 ?>
 
 <!--Main layout-->
@@ -34,7 +49,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']['type'] == 0) {
             <div class="card-body">
                 <table class="w-100">
                 <tr>
-                    <td><h3>14.5K</h3></td>
+                    <td><h3><?php echo (int)$tot_sales ?></h3></td>
                     <td class="text-end text-secondary"><i class="fa-solid fa-dollar-sign fa-3x"></i></td>
                 </tr>
                 </table>
@@ -49,7 +64,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']['type'] == 0) {
             <div class="card-body">
                 <table class="w-100">
                 <tr>
-                    <td><h3>10.2K</h3></td>
+                    <td><h3><?php echo $tot_prod_sold ?></h3></td>
                     <td class="text-end text-secondary"><i class="fa-solid fa-bag-shopping fa-3x"></i></td>
                 </tr>
                 </table>
@@ -64,7 +79,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']['type'] == 0) {
             <div class="card-body">
                 <table class="w-100">
                 <tr>
-                    <td><h3>1,502</h3></td>
+                    <td><h3><?php echo $tot_cust ?></h3></td>
                     <td class="text-end text-secondary"><i class="fa-solid fa-users fa-3x"></i></td>
                 </tr>
                 </table>
@@ -79,7 +94,7 @@ if (isset($_SESSION['login']) && $_SESSION['user']['type'] == 0) {
             <div class="card-body">
                 <table class="w-100">
                 <tr>
-                    <td><h3>5</h3></td>
+                    <td><h3><?php echo $tot_pending ?></h3></td>
                     <td class="text-end text-secondary"><i class="fa-solid fa-clock-rotate-left fa-3x"></i></td>
                 </tr>
                 </table>

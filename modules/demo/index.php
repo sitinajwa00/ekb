@@ -5,6 +5,8 @@ require INCL_PATH . 'user.inc.php';
 require INCL_PATH . 'product.inc.php';
 require INCL_PATH . 'cart.inc.php';
 require INCL_PATH . 'report.inc.php';
+require INCL_PATH . 'order.inc.php';
+require INCL_PATH . 'dashboard.inc.php';
 
 // $user = new UserController();
 // $response = $user->displayAllUsers();
@@ -73,9 +75,18 @@ require INCL_PATH . 'report.inc.php';
 
 // echo json_encode($result);
 
-$updateQty = new ProductController();
-$updateQty->updateQty('23', 3);
+// $updateQty = new ProductController();
+// $updateQty->updateQty('23', 3);
 
-echo 'check db';
+// echo 'check db';
+
+// $order_id = new OrderController();
+// $result = $order_id->displayOrderID('11');
+
+// echo json_encode($result[0]['orderID']);
+
+$dashboard = new DashboardController();
+$result = $dashboard->displayTotalSales();
+echo json_encode($result);
 
 ?>

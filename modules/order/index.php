@@ -32,8 +32,9 @@ require ASSET_PATH . 'sidenav_owner.php';
           <table id="example" class="table bg-white" style="width:100%">
             <thead>
               <tr class="bg-primary text-light">
+                <th>Order ID</th>
                 <th>Date</th>
-                <th>Customer</th>
+                <!-- <th>Customer</th> -->
                 <th>Item</th>
                 <th>Delivery Type</th>
                 <th>Status</th>
@@ -57,8 +58,9 @@ $(document).ready(function () {
     data: <?php echo json_encode($response) ?>,
     src: 'data',
     columns: [
+        { data: 'orderID' },
         { data: 'date' },
-        { data: 'userName' },
+        // { data: 'userName' },
         { data: 'orderItem' },
         { data: 'deliveryType' },
         { data: 'orderStatus' },

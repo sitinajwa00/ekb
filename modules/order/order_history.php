@@ -69,22 +69,24 @@ require ASSET_PATH . 'sidenav_cust.php';
                                 echo '
                                 <div class="bg-light mb-2">
                                     <table class="table align-middle">
-                                        <tbody>
+                                        <tbody data-id="'.$val['orderID'].'">
                                             <tr>
-                                                <td class="fw-bold text-uppercase">'.$val['orderStatus'].'</td>
-                                                <td class="text-end">View Details</td>
-                                            </tr>
-                                            <tr>
-                                                <td>'. substr($val['orderItem'], 0, -2) .'</td>
-                                                <td class="text-end">Total Order: RM'.$val['totalPrice'].'</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <i>Date: '.date('d M Y', strtotime($val['date'])).'</i>
-                                                </td>
-                                                <td class="text-end">
-                                                    '.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'
-                                                </td>
+                                                <td class="fw-bold"><i>'.date('d M Y', strtotime($val['date'])).'</i></td>
+                                                <td></td>
+                                                <td class="fw-bold text-end">'.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'</td>
+                                            </tr>';
+                                            $order_item = new OrderController();
+                                            $item_list = $order_item->displayAllItemsByOrderID($val['orderID']);
+
+                                            foreach ($item_list as $value) { 
+                                                echo '<tr>
+                                                    <td class="col-6">'.$value['product_name'].'</td>
+                                                    <td>x'.$value['qty'].'</td>
+                                                    <td class="text-end">'.$value['total_price'].'</td>
+                                                </tr>';
+                                            } 
+                                            echo '<tr>
+                                                <td colspan="3" class="text-end fw-bold">Total: RM '.$val['totalPrice'].'</td>
                                             </tr>
                                         </tbody>
                                     </table>

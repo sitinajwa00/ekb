@@ -30,10 +30,20 @@ if (isset($_GET['cart_id'])) {
     $order_cod = new OrderController();
     $order_cod->sendOrderDetailsCod($custID, $item_cod, $_SESSION['payment']['cod'], $_SESSION['user']['address'], $status);
 
+    // Get Order ID and insert into DB order_items
+    $order_id = new OrderController();
+    $order_id = $order_id->displayOrderID($custID); 
+    $order_id = $order_id[0]['orderID'];
+
+    foreach ($result as $val) {
+        $order_items = new OrderController();
+        $order_items->sendOrderItemsDetail($order_id, $val['product_name'], $val['order_qty'], $val['total_price'], 'COD');
+    }
+
     // Update Product Database
     foreach ($result as $val) {
         $updateQty = new ProductController();
-        $updateQty->updateQty($val['productID'], parseInt($val['order_qty']));
+        $updateQty->updateQty($val['productID'], (int)$val['order_qty']);
     }
 
     // Update Cart Database

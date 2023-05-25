@@ -62,9 +62,26 @@ $payment->getPaymentDetails($custID, $chargeID, $amount, $status);
 $order_pos = new OrderController();
 $order_pos->sendOrderDetailsPos($custID, $chargeID, $item_pos, $amount, $address, $status);
 
+$order_id = new OrderController();
+$order_id = $order_id->displayOrderID($custID); 
+$orderid_pos = $order_id[0]['orderID'];
+
 if ($_SESSION['cart']['cod'] > 0) {
     $order_cod = new OrderController();
     $order_cod->sendOrderDetailsCod($custID, $item_cod, $amount_cod, $address, $status);
+}
+
+$order_id = new OrderController();
+$order_id = $order_id->displayOrderID($custID); 
+$orderid_cod = $order_id[0]['orderID'];
+
+// Insert into DB order_items
+foreach ($result as $value) {
+    $order_items = new OrderController();
+    if ($value['delivery_type'] == 'pos')
+        $order_items->sendOrderItemsDetail($orderid_pos, $value['product_name'], $value['order_qty'], $value['total_price'], 'Postage');
+    else if ($value['delivery_type'] == 'cod')
+        $order_items->sendOrderItemsDetail($orderid_cod, $value['product_name'], $value['order_qty'], $value['total_price'], 'COD');
 }
 
 // Update Product Database
