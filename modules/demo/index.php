@@ -70,8 +70,15 @@ require INCL_PATH . 'dashboard.inc.php';
 
 // echo json_encode($result);
 
-// $report = new ReportController();
-// $result = $report->displayTotalSalesDailyByMonth('COD', 4, 2023);
+$report = new ReportController();
+$result = $report->displayTotalSalesDailyByMonth('COD', 3, 2023);
+
+$total = 0;
+foreach ($result as $res) {
+    $total += (double)$res['Total_Sales'];
+}
+
+echo number_format($total, 2);
 
 // echo json_encode($result);
 
@@ -85,8 +92,28 @@ require INCL_PATH . 'dashboard.inc.php';
 
 // echo json_encode($result[0]['orderID']);
 
-$dashboard = new DashboardController();
-$result = $dashboard->displayTotalSales();
-echo json_encode($result);
+// $dashboard = new DashboardController();
+// $result = $dashboard->displayTotalSales();
+// echo json_encode($result);
+
+// $item = new CartController();
+// $result = $item->checkItemInCart(3, 43);
+// echo json_encode($result) . '<br><br>';
+// $demo = false;
+// foreach ($result as $res) {
+//     if (isset($res['delivery_type']) && $res['delivery_type']=='cod')
+//         $demo = true;
+// }
+
+// $month = 3;
+
+// $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+
+// foreach ($months as $month_index => $m) {
+//     if (($month-1) == $month_index)
+//         $monthName = $m;
+// }
+
+// echo $monthName;
 
 ?>

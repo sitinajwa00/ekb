@@ -10,16 +10,37 @@
      >
   <div class="position-sticky">
     <div class="list-group list-group-flush mx-3 mt-4">
+      <!-- Dashboard -->
+      <?php if ($_GET['module'] == 'home') {?>
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=home&action=dashboard"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+        <i class="fas fa-tachometer-alt fa-fw me-3"></i
+          ><span>Main dashboard</span>
+      </a>
+      <?php } else {?> 
+      <a
+         href="<?php echo APP_URL ?>?module=home&action=dashboard"
          class="list-group-item list-group-item-action py-4 ripple "
          aria-current="true"
          >
         <i class="fas fa-tachometer-alt fa-fw me-3"></i
           ><span>Main dashboard</span>
       </a>
+      <?php } ?>
 
       <!-- Order List -->
+      <?php if ($_GET['module'] == 'order') {?> 
+      <a
+         href="<?php echo APP_URL ?>?module=order"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-box fa-fw me-3"></i><span>Order List</span>
+      </a>
+      <?php } else {?> 
       <a
          href="<?php echo APP_URL ?>?module=order"
          class="list-group-item list-group-item-action py-4 ripple"
@@ -27,6 +48,7 @@
          >
          <i class="fa-solid fa-box fa-fw me-3"></i><span>Order List</span>
       </a>
+      <?php } ?>
 
       <!-- Customer List -->
       <?php if ($_GET['module']=='customer') {?>
@@ -47,6 +69,16 @@
       </a>
       <?php }?>
       
+      <!-- Sales Report -->
+      <?php if ($_GET['module'] == 'report') {?> 
+      <a
+         href="<?php echo APP_URL ?>?module=report"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-list fa-fw me-3"></i><span>Sales Report</span>
+      </a>
+      <?php } else {?>
       <a
          href="<?php echo APP_URL ?>?module=report"
          class="list-group-item list-group-item-action py-4 ripple"
@@ -54,6 +86,7 @@
          >
          <i class="fa-solid fa-list fa-fw me-3"></i><span>Sales Report</span>
       </a>
+      <?php }?>
     </div>
   </div>
 </nav>
@@ -95,13 +128,6 @@
 
     <!-- Right links -->
     <ul class="navbar-nav ms-auto d-flex flex-row">
-
-      <!-- Icon -->
-      <li class="nav-item">
-        <a class="nav-link me-3 me-lg-0" href="#">
-          <i class="fa-solid fa-cart-shopping text-white"></i>
-        </a>
-      </li>
       <!-- Icon -->
       <li class="nav-item me-3 me-lg-0">
         <a class="nav-link" href="<?php echo APP_URL ?>?module=profile">

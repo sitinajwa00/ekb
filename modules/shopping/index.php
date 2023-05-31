@@ -58,22 +58,35 @@ require ASSET_PATH . 'sidenav_cust.php';
                         </table>
                         <div class="row mb-2">
                             <div class="col-4">
-                                <input type="number" class="form-control" name="" min="0" value="0">
+                                <input type="number" class="form-control qty" name="" min="1" value="1">
                             </div>
                             <div class="col-8">
-                                <select name="" id="" class="form-select">
+                                <select name="" id="" class="form-select type">
                                     <option value="pos" <?php echo ($prod['is_pos']!='1' ? 'hidden disabled' : '') ?>>Postage</option>
                                     <option value="cod" <?php echo ($prod['is_cod']!='1' ? 'hidden disabled' : '') ?>>COD</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <span class="btn btn-dark w-100">Add to cart</span>
+                            <?php 
+                            echo '<span data-id="'.$prod['productID'].'" data-name="'.$prod['productName'].'" data-qty="1" data-type="'.($prod['is_pos']=='1' ? 'pos' : 'cod').'" data-price-pos="'.$prod['productPricePos'].'" data-price-cod="'.$prod['productPriceCOD'].'" class="btn btn-dark w-100 add_to_cart_btn">Add To Cart</span>'
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
             <?php } ?>
+        </div>
+        <div hidden>
+            <form action="<?php echo APP_URL . '?module=shopping&action=submit' ?>" method="post">
+                productID: <input type="text" name="product_id" value="">
+                productName: <input type="text" name="product_name" value="">
+                delivery: <input type="text" name="delivery_type" value="">
+                price: <input type="text" name="unit_price" value="">
+                qty: <input type="text" name="order_qty" value=""> 
+                <button type="submit" name="add_to_cart">Submit</button>   
+            </form>
+            
         </div>
         <!-- END: Content -->
     </div>
@@ -88,7 +101,41 @@ require ASSET_PATH . 'sidenav_cust.php';
             $(location).attr('href', '<?php echo APP_URL ?>?module=shopping&action=product_detail&product_id='+product_id);
         });
 
-        $('.my-cart-badge').html('<?php echo $cartCount ?>');
+        // Set default value in qty form
+        $('.qty').val('1');
+
+        // My Cart Count
+        var cart_count = <?php echo $cartCount; ?>;
+        $('.my-cart-badge').html(cart_count);
+        if (cart_count > 0)
+            $('.my-cart-badge-2').html('My Cart&emsp;<span class="badge badge-warning">'+cart_count+'</span>');
+
+        // Add To Cart
+        $('.qty').on('change', function() {
+            $(this).closest('.row').next().find('.add_to_cart_btn').attr('data-qty', $(this).val());
+        });
+
+        $('.type').on('change', function() {
+            $(this).closest('.row').next().find('.add_to_cart_btn').attr('data-type', $(this).val());
+        });
+
+        $('.add_to_cart_btn').on('mouseenter', function() {
+            var product_id = $(this).attr('data-id');
+            var product_name = $(this).attr('data-name');
+            var delivery_type = $(this).attr('data-type');
+            var unit_price = (delivery_type=='pos' ? $(this).attr('data-price-pos') : $(this).attr('data-price-cod'));
+            var order_qty = $(this).attr('data-qty');
+
+            $('input[name="product_id"]').attr('value',product_id );
+            $('input[name="product_name"]').attr('value', product_name);
+            $('input[name="delivery_type"]').attr('value', delivery_type);
+            $('input[name="unit_price"]').attr('value', unit_price);
+            $('input[name="order_qty"]').attr('value', order_qty);
+        });
+
+        $('.add_to_cart_btn').on('click', function() {
+            $('button[name="add_to_cart"]')[0].click();
+        });
     });
 </script>
 

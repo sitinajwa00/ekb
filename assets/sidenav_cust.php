@@ -1,4 +1,3 @@
-
 <body>
 
 <!--Main Navigation-->
@@ -32,23 +31,53 @@
       <?php }?>
       
       <!-- Shopping -->
+      <?php if ($_GET['module']=='shopping') {?>
+      <a
+         href="<?php echo APP_URL ?>?module=shopping"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-basket-shopping fa-fw me-3"></i><span>Shopping</span>
+      </a>
+      <?php } else {?>
       <a
          href="<?php echo APP_URL ?>?module=shopping"
          class="list-group-item list-group-item-action py-4 ripple "
          aria-current="true"
          >
          <i class="fa-solid fa-basket-shopping fa-fw me-3"></i><span>Shopping</span>
-      </a>
+      </a> 
+      <?php }?>
       
       <!-- Cart -->
+      <?php if ($_GET['module']=='cart') {?>
+      <a
+         href="<?php echo APP_URL ?>?module=cart"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span class="my-cart-badge-2">My Cart</span>
+      </a>
+      <?php } else {?>
       <a
          href="<?php echo APP_URL ?>?module=cart"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
-         <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span>My Cart</span>
+         <i class="fa-solid fa-cart-shopping fa-fw me-3"></i><span class="my-cart-badge-2">My Cart</span>
       </a>
+      <?php }?>
       
+      <!-- Order History -->
+      <?php if ($_GET['action']=='order_history') {?>
+      <a
+         href="<?php echo APP_URL ?>?module=order&action=order_history"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-clock-rotate-left fa-fw me-3"></i><span>Order History</span>
+      </a>
+      <?php } else {?> 
       <a
          href="<?php echo APP_URL ?>?module=order&action=order_history"
          class="list-group-item list-group-item-action py-4 ripple"
@@ -56,13 +85,15 @@
          >
          <i class="fa-solid fa-clock-rotate-left fa-fw me-3"></i><span>Order History</span>
       </a>
-      <a
+      <?php }?>
+
+      <!-- <a
          href="#"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
          <i class="fa-solid fa-phone fa-fw me-3"></i><span>Contact Us</span>
-      </a>
+      </a> -->
     </div>
   </div>
 </nav>

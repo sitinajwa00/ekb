@@ -49,7 +49,7 @@ $tot_cust = $tot_cust->displayTotalCustomer();
             <div class="card-body">
                 <table class="w-100">
                 <tr>
-                    <td><h3><?php echo (int)$tot_sales ?></h3></td>
+                    <td><h3><small>RM</small> <?php echo (int)$tot_sales ?></h3></td>
                     <td class="text-end text-secondary"><i class="fa-solid fa-dollar-sign fa-3x"></i></td>
                 </tr>
                 </table>

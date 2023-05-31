@@ -39,7 +39,10 @@ require ASSET_PATH . 'sidenav_cust.php';
 
 <script>
     $(document).ready(function(){
-        $('.my-cart-badge').html('<?php echo $cartCount ?>')
+        var cart_count = <?php echo $cartCount; ?>;
+        $('.my-cart-badge').html(cart_count);
+        if (cart_count > 0)
+            $('.my-cart-badge-2').html('My Cart&emsp;<span class="badge badge-warning">'+cart_count+'</span>');
     });
 </script>
 

@@ -67,8 +67,7 @@ if (isset($_POST['updateQty'])) {
                     <table class="table">
                         <thead>
                             <tr class="bg-secondary">
-                                <th></th>
-                                <th>Product</th>
+                                <th colspan="2" class="text-center">Product</th>
                                 <th>Unit Price</th>
                                 <th class="col-2">Quantity</th>
                                 <th>Total Price</th>
@@ -157,7 +156,11 @@ if (isset($_POST['updateQty'])) {
 
 <script>
     $(document).ready(function(){
-        $('.my-cart-badge').html('<?php echo $cartCount; ?>');
+        // My Cart Badge
+        var cart_count = <?php echo $cartCount; ?>;
+        $('.my-cart-badge').html(cart_count);
+        if (cart_count > 0)
+            $('.my-cart-badge-2').html('My Cart&emsp;<span class="badge badge-warning">'+cart_count+'</span>');
     });
 
     $(document).on('change', '.qty', function(){

@@ -112,7 +112,7 @@ if (isset($_POST['accept'])) {
                                     <option value="Out For Delivery" <?php echo ($detail['orderStatus']=='Out For Delivery' ? 'selected' : '') ?>>Out For Delivery</option>
                                     <option value="Complete" <?php echo ($detail['orderStatus']=='Complete' ? 'selected' : '') ?>>Complete</option>
                                 </select>
-                                <button type="submit" name="update_status" class="btn btn-secondary update_btn">Update</button>
+                                <button type="submit" name="update_status" class="btn btn-secondary update_btn" <?php echo ($detail['orderStatus']=='Complete' ? 'disabled' : '') ?>>Update</button>
                             </form>
                         </div>
 

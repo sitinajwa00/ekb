@@ -10,6 +10,16 @@ $response = $cust->displayAllProducts();
 require ASSET_PATH . 'header.php';
 require ASSET_PATH . 'sidenav_admin.php';
 
+if (isset($_POST['submit'])) {
+    $addProd = new ProductController();
+    $addProd->addQty($_POST['productID'], (int)$_POST['qty']);
+
+    echo '<script>
+        alert("Successfully add stock quantity.");
+        window.location.href = "'.APP_URL.'?module=stock";
+    </script>';
+}
+
 ?>
 
 <!--Main layout-->
@@ -27,10 +37,6 @@ require ASSET_PATH . 'sidenav_admin.php';
             </nav>
         </div>
         <!-- BEGIN: Content -->
-        <div class="d-flex flex-row justify-content-end">
-            <a href="insert.php"><span class="btn btn-primary">Add New</span></a>
-        </div>
-
         <div>
           <table id="example" class="table bg-white" style="width:100%">
             <thead>
@@ -43,6 +49,46 @@ require ASSET_PATH . 'sidenav_admin.php';
             </thead>
           </table>
         </div>
+
+        <!-- Modal -->
+        <form action="" method="post">
+            <div class="modal modal-add-stock fade" id="" tabindex="-1" aria-labelledby="addStockModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addStockModal">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Product ID -->
+                            <input type="hidden" name="productID" id="" class="form-control" value="">
+                        <!-- Product Current Qty -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="" class="form-label">Current Quantity:</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="" id="" class="form-control modal-curr-qty" value="" disabled>
+                            </div>
+                        </div>
+                        <!-- Add Qty -->
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="" class="form-label">No. of stock added:</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" name="qty" id="" class="form-control" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="submit" class="btn btn-warning">Save changes</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <!-- END: Content -->
     </div>
 </main>
@@ -75,15 +121,18 @@ $(document).ready(function () {
         {
             targets: -2,
             render: function(data, type, full, meta) {
-                return (data<=10 ? '<span class="text-danger">'+data+'</span>' : data);
+                return (data<=20 ? data+'&emsp;<span class="badge badge-danger">Low stock</span>' : data);
             }
         },
         {
             targets: -1,
             render: function(data, type, full, meta) {
                 return (
+                    // '<div>' +
+                    //     '<a href="<?php echo APP_URL ?>?module=stock&action=detail&product_id='+full['productID']+'"><span class="btn btn-warning me-1">Add Stock</span></a>' +
+                    // '</div>'
                     '<div>' +
-                        '<a href="<?php echo APP_URL ?>?module=stock&action=detail&product_id='+full['productID']+'"><span class="btn btn-warning me-1">Add Stock</span></a>' +
+                        '<button type="button" class="btn btn-add-stock btn-warning" data-id="'+full['productID']+'" data-name="'+full['productName']+'" data-current-qty="'+full['productQty']+'" data-bs-toggle="modal" data-bs-target="#id'+full['productID']+'">Add Stock</button>' +
                     '</div>'
                 );
             }
@@ -92,6 +141,32 @@ $(document).ready(function () {
     dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
     });
 });
+
+$(document).ready(function(){
+    $('.btn-add-stock').mouseover(function(){
+        var product_id = $(this).attr('data-id');
+        var product_name = $(this).attr('data-name');
+        var product_qty = $(this).attr('data-current-qty');
+        
+        $('.modal-add-stock').attr('id', 'id'+product_id);
+        $('input[name="productID"]').attr('value', product_id);
+        $('.modal-title').html('Add Stock for: '+product_name);
+        $('.modal-curr-qty').attr('value', product_qty);
+    });
+
+    $("input[name='qty']").TouchSpin({
+        initval: 0,
+        min: 0,
+        max: 1000,
+        step: 1,
+        // decimals: 2,
+        boostat: 5,
+        maxboostedstep: 10,
+        buttondown_class: 'btn btn-dark h-100',
+        buttonup_class: 'btn btn-dark h-100',
+    });
+});
+
 </script>
 
 <?php

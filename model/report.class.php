@@ -11,7 +11,7 @@ class Report extends Db {
     }
 
     protected function getTotalSalesDaily($type) {
-        $sql = "SELECT Date(date) AS Date, SUM(totalPrice) AS Total_Sales, deliveryType AS Delivery_Type FROM orders WHERE deliveryType=? GROUP BY Date(date)";
+        $sql = "SELECT Date(date) AS Date, SUM(totalPrice) AS Total_Sales, deliveryType AS Delivery_Type FROM orders WHERE deliveryType=? AND MONTH(date)=MONTH(now()) GROUP BY Date(date)";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$type]);
 

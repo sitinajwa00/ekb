@@ -50,6 +50,16 @@
       </a>
       <?php }?>
       
+      <!-- Stock -->
+      <?php if ($_GET['module'] == 'stock')  {?>
+      <a
+         href="<?php echo APP_URL ?>?module=stock"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-boxes-stacked fa-fw me-3"></i><span>Stock</span>
+      </a>
+      <?php } else {?>
       <a
          href="<?php echo APP_URL ?>?module=stock"
          class="list-group-item list-group-item-action py-4 ripple"
@@ -57,6 +67,18 @@
          >
          <i class="fa-solid fa-boxes-stacked fa-fw me-3"></i><span>Stock</span>
       </a>
+      <?php }?>  
+      
+      <!-- Sales Report -->
+      <?php if ($_GET['module'] == 'report')  {?>
+      <a
+         href="<?php echo APP_URL ?>?module=report"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-list fa-fw me-3"></i><span>Sales Report</span>
+      </a>
+      <?php } else {?>
       <a
          href="<?php echo APP_URL ?>?module=report"
          class="list-group-item list-group-item-action py-4 ripple"
@@ -64,13 +86,15 @@
          >
          <i class="fa-solid fa-list fa-fw me-3"></i><span>Sales Report</span>
       </a>
-      <a
+      <?php }?> 
+
+      <!-- <a
          href="#"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
          <i class="fa-solid fa-user fa-fw me-3"></i><span>User</span>
-      </a>
+      </a> -->
     </div>
   </div>
 </nav>
@@ -112,13 +136,6 @@
 
     <!-- Right links -->
     <ul class="navbar-nav ms-auto d-flex flex-row">
-
-      <!-- Icon -->
-      <li class="nav-item">
-        <a class="nav-link me-3 me-lg-0" href="#">
-          <i class="fa-solid fa-cart-shopping text-white"></i>
-        </a>
-      </li>
       <!-- Icon -->
       <?php if ($_GET['module']=='profile') {?>
       <li class="nav-item me-3 me-lg-0">

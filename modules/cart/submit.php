@@ -55,7 +55,7 @@ if (isset($_GET['cart_id'])) {
     $removeCart->removeCart($custID);
 
     echo '<script>
-        alert("Redirect to Order History");
+        alert("Successfully Place Order");
         window.location.href = "'.APP_URL.'?module=order&action=order_history";
     </script>';
 }

@@ -9,6 +9,8 @@ require ASSET_PATH . 'sidenav_cust.php';
 
 $cart = new CartController();
 $result_cart = $cart->displayAllCartsByUser($_SESSION['user']['id']);
+$cart_list = $result_cart;
+$cartCount = count($cart_list);
 
 // Quantity cart for cod and postage
 $count_cod = $_SESSION['cart']['cod'];
@@ -44,14 +46,15 @@ $count_pos = $_SESSION['cart']['pos'];
                             <?php foreach ($result_cart as $val) {?>
                                 <?php if ($val['delivery_type'] == 'cod') {?>
                                 <tr>
-                                    <td>x<?php echo $val['order_qty'] . ' ' . $val['product_name'] ?></td>
+                                    <td><?php echo $val['product_name'] ?></td>
+                                    <td class="text-end">x<?php echo $val['order_qty'] ?></td>
                                     <td class="text-end"><?php echo $val['total_price'] ?></td>
                                 </tr>
                                 <?php $total_cod += $val['total_price']; $_SESSION['payment']['cod'] =number_format($total_cod, 2);?>
                                 <?php } ?>
                             <?php }?>
                             <tr>
-                                <td class="text-end fw-bold">TOTAL</td>
+                                <td class="text-end fw-bold" colspan="2">TOTAL</td>
                                 <td class="text-end">RM <b><?php echo number_format($total_cod, 2) ?></b></td>
                             </tr>
                         </table>
@@ -70,14 +73,15 @@ $count_pos = $_SESSION['cart']['pos'];
                             <?php foreach ($result_cart as $val) {?>
                                 <?php if ($val['delivery_type'] == 'pos') {?>
                                 <tr>
-                                    <td>x<?php echo $val['order_qty'] . ' ' . $val['product_name'] ?></td>
+                                    <td><?php echo $val['product_name'] ?></td>
+                                    <td class="text-end">x<?php echo $val['order_qty'] ?></td>
                                     <td class="text-end"><?php echo $val['total_price'] ?></td>
                                 </tr>
                                 <?php $total_pos += $val['total_price']; $_SESSION['payment']['amount'] =number_format($total_pos, 2);?>
                                 <?php } ?>
                             <?php }?>
                             <tr>
-                                <td class="text-end fw-bold">TOTAL</td>
+                                <td class="text-end fw-bold" colspan="2">TOTAL</td>
                                 <td class="text-end">RM <b><?php echo number_format($total_pos, 2) ?></b></td>
                             </tr>
                         </table>
@@ -94,6 +98,14 @@ $count_pos = $_SESSION['cart']['pos'];
 <!--Main layout-->
 
 <script>
+    $(document).ready(function(){
+        // My Cart Badge
+        var cart_count = <?php echo $cartCount; ?>;
+        $('.my-cart-badge').html(cart_count);
+        if (cart_count > 0)
+            $('.my-cart-badge-2').html('My Cart&emsp;<span class="badge badge-warning">'+cart_count+'</span>');
+    });
+    
     $(document).on('click', '.confirm_btn', function() {
         var count_pos = <?php echo $count_pos ?>;
 
