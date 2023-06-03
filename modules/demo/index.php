@@ -70,15 +70,15 @@ require INCL_PATH . 'dashboard.inc.php';
 
 // echo json_encode($result);
 
-$report = new ReportController();
-$result = $report->displayTotalSalesDailyByMonth('COD', 3, 2023);
+// $report = new ReportController();
+// $result = $report->displayTotalSalesDailyByMonth('COD', 3, 2023);
 
-$total = 0;
-foreach ($result as $res) {
-    $total += (double)$res['Total_Sales'];
-}
+// $total = 0;
+// foreach ($result as $res) {
+//     $total += (double)$res['Total_Sales'];
+// }
 
-echo number_format($total, 2);
+// echo number_format($total, 2);
 
 // echo json_encode($result);
 
@@ -115,5 +115,15 @@ echo number_format($total, 2);
 // }
 
 // echo $monthName;
+
+// $income = new DashboardController();
+// $result = $income->displayTodayIncome();
+
+// echo json_encode($result);
+
+$product = new DashboardController();
+$result = $product->displayTotalProductToday();
+
+echo json_encode($result);
 
 ?>

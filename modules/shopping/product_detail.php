@@ -80,7 +80,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                 <input type="number" name="order_qty" class="form-control" min="0" value="1"> 
                             </div>
                             <div class="col-4">
-                                <small class="text-danger"><?php echo ($detail['productQty'] <= 10 ? $detail['productQty'] . ' item(s) available' : '') ?></small>
+                                <small class="text-danger"><?php echo ($detail['productQty'] <= 20 ? $detail['productQty'] . ' item(s) available' : '') ?></small>
                             </div>
                         </div>
                         <div class="row">

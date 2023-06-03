@@ -14,15 +14,46 @@ require INCL_PATH . 'dashboard.inc.php';
 
 $tot_sales = new DashboardController();
 $tot_sales = $tot_sales->displayTotalSales();
+$tot_sales = thousandsCurrencyFormat($tot_sales);
 
 $tot_prod_sold = new DashboardController();
 $tot_prod_sold = $tot_prod_sold->displayTotalProductSold();
+$tot_prod_sold = thousandsCurrencyFormat($tot_prod_sold);
 
 $tot_pending = new DashboardController();
 $tot_pending = $tot_pending->displayTotalPendingOrder();
 
 $tot_cust = new DashboardController();
 $tot_cust = $tot_cust->displayTotalCustomer();
+$tot_cust = thousandsCurrencyFormat($tot_cust);
+
+$income = new DashboardController();
+$income = $income->displayTodayIncome();
+$today_income = thousandsCurrencyFormat($income);
+
+$tot_prod_today = new DashboardController();
+$tot_prod_today = $tot_prod_today->displayTotalProductToday();
+$tot_prod_today = thousandsCurrencyFormat($tot_prod_today);
+
+function thousandsCurrencyFormat($num) {
+
+    if($num>1000) {
+  
+          $x = round($num);
+          $x_number_format = number_format($x);
+          $x_array = explode(',', $x_number_format);
+          $x_parts = array('k', 'm', 'b', 't');
+          $x_count_parts = count($x_array) - 1;
+          $x_display = $x;
+          $x_display = $x_array[0] . ((int) $x_array[1][0] !== 0 ? '.' . $x_array[1][0] : '');
+          $x_display .= $x_parts[$x_count_parts - 1];
+  
+          return $x_display;
+  
+    }
+  
+    return $num;
+}
 
 ?>
 
@@ -49,7 +80,7 @@ $tot_cust = $tot_cust->displayTotalCustomer();
             <div class="card-body">
                 <table class="w-100">
                 <tr>
-                    <td><h3><small>RM</small> <?php echo (int)$tot_sales ?></h3></td>
+                    <td><h3><small>RM</small> <?php echo $tot_sales ?></h3></td>
                     <td class="text-end text-secondary"><i class="fa-solid fa-dollar-sign fa-3x"></i></td>
                 </tr>
                 </table>
@@ -122,9 +153,9 @@ $tot_cust = $tot_cust->displayTotalCustomer();
                 <div>Today's Summary</div>
                 <div class="mt-5">
                     <p class="text-center">Income:</p>
-                    <h3 class="text-center">5.3K</h3>
+                    <h3 class="text-center"><?php echo ($income != null ? $today_income : '0.00') ?></h3>
                     <p class="text-center">Product Sold:</p>
-                    <h3 class="text-center">1023</h3>
+                    <h3 class="text-center"><?php echo $tot_prod_today ?></h3>
                 </div>
                 </div>
             </div>

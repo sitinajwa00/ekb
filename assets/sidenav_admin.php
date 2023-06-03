@@ -131,9 +131,6 @@
       <span class="ms-3 text-warning" style="font-family:'Lato', sans-serif;"><b>EMPAYAR</b> KEREPEK BAWANG</span>
     </a>
 
-    <!-- Checking Session -->
-    <span class="text-white"><?php echo (isset($_SESSION['user']) ? $_SESSION['user']['name'] : '') ?></span>
-
     <!-- Right links -->
     <ul class="navbar-nav ms-auto d-flex flex-row">
       <!-- Icon -->

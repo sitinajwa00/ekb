@@ -36,6 +36,24 @@ class Dashboard extends Db {
         $results = $stmt->fetchAll();
         return $results;
     }
+
+    protected function getTodayIncome() {
+        $sql = "SELECT SUM(totalPrice) AS total_income FROM orders WHERE DATE(date) = CURDATE()";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
+    protected function getTotalProductToday() {
+        $sql = "SELECT * FROM orders, order_items WHERE order_items.order_id = orders.orderID AND DATE(date) = CURDATE()";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll();
+        return $results;
+    }
 }
 
 ?>
