@@ -61,7 +61,7 @@ class AddProductPage extends ProductController {
                             <!-- Stock -->
                             <div class="row mb-3">
                                 <div class="col-sm-2">
-                                    <label for="" class="form-label">Quantity</label>
+                                    <label for="" class="form-label">Quantity *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="number" name="quantity" id="" class="form-control qty" min="0">
@@ -148,16 +148,24 @@ class AddProductPage extends ProductController {
             });
 
             function validate() {
-                if ($('.name').val()=='' || $('.qty').val()=='' || $('.cod-price').val()=='' || $('.pos-price').val()=='') {
-                    alert('Please complete the form!');
+                if ($('.name').val()=='') {
+                    alert('Please fill in the name!');
                     return false;
                 }
                 if ($('[name="weight"]:checked').val() == undefined) {
                     alert('Please select the weight!');
                     return false;
                 }
+                if ($('.qty').val()=='') {
+                    alert('Please fill in the quantity!');
+                    return false;
+                }
                 if (!$('[name="is_cod"]').is(':checked') && !$('[name="is_pos"]').is(':checked')) {
                     alert('Please tick at least 1 service!');
+                    return false;
+                }
+                if ($('.cod-price').val()=='' || $('.pos-price').val()=='') {
+                    alert('Please fill in the price!');
                     return false;
                 }
                 return (true);

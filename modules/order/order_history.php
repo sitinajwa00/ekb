@@ -65,19 +65,19 @@ require ASSET_PATH . 'sidenav_cust.php';
                 </li> -->
                 <!-- Tab: Pending -->
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">Pending&ensp;<?php echo ($pending > 0 ? '<span class="badge badge-primary">'.$pending.'</span>' : '') ?></button>
+                  <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">Pending&ensp;<?php echo ($pending > 0 ? '<span class="badge badge-warning">'.$pending.'</span>' : '') ?></button>
                 </li>
                 <!-- Tab: Processing -->
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="processing-tab" data-bs-toggle="tab" data-bs-target="#processing" type="button" role="tab" aria-controls="profile" aria-selected="false">Processing&ensp;<?php echo ($processing > 0 ? '<span class="badge badge-primary">'.$processing.'</span>' : '') ?></button>
+                  <button class="nav-link" id="processing-tab" data-bs-toggle="tab" data-bs-target="#processing" type="button" role="tab" aria-controls="profile" aria-selected="false">Processing&ensp;<?php echo ($processing > 0 ? '<span class="badge badge-warning">'.$processing.'</span>' : '') ?></button>
                 </li>
                 <!-- Tab: Ship -->
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="false">To Ship&ensp;<?php echo ($to_ship > 0 ? '<span class="badge badge-primary">'.$to_ship.'</span>' : '') ?></button>
+                  <button class="nav-link" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="false">To Ship&ensp;<?php echo ($to_ship > 0 ? '<span class="badge badge-warning">'.$to_ship.'</span>' : '') ?></button>
                 </li>
                 <!-- Tab: Delivery -->
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab" aria-controls="delivery" aria-selected="false">Out for Delivery&ensp;<?php echo ($out_for_delivery > 0 ? '<span class="badge badge-primary">'.$out_for_delivery.'</span>' : '') ?></button>
+                  <button class="nav-link" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab" aria-controls="delivery" aria-selected="false">Out for Delivery&ensp;<?php echo ($out_for_delivery > 0 ? '<span class="badge badge-warning">'.$out_for_delivery.'</span>' : '') ?></button>
                 </li>
                 <!-- Tab: Complete -->
                 <li class="nav-item" role="presentation">

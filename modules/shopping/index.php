@@ -103,6 +103,7 @@ require ASSET_PATH . 'sidenav_cust.php';
 
         // Set default value in qty form
         $('.qty').val('1');
+        $('.type').val($('.type option:first').val());
 
         // My Cart Count
         var cart_count = <?php echo $cartCount; ?>;

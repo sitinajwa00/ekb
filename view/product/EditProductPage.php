@@ -143,8 +143,8 @@ class EditProductPage extends ProductController {
             });
 
             function validate() {
-                if ($('.name').val()=='' || $('.cod-price').val()=='' || $('.pos-price').val()=='') {
-                    alert('Please complete the form!');
+                if ($('.name').val()=='') {
+                    alert('Please fill in the name!');
                     return false;
                 }
                 if ($('[name="weight"]:checked').val() == undefined) {
@@ -153,6 +153,10 @@ class EditProductPage extends ProductController {
                 }
                 if (!$('[name="is_cod"]').is(':checked') && !$('[name="is_pos"]').is(':checked')) {
                     alert('Please tick at least 1 service!');
+                    return false;
+                }
+                if ($('.cod-price').val()=='' || $('.pos-price').val()=='') {
+                    alert('Please fill in the price!');
                     return false;
                 }
                 return (true);

@@ -105,7 +105,8 @@ if (isset($_POST['updateQty'])) {
                         <div class="card-body pt-1">
                           <span class="fw-bold"><small><?php echo $_SESSION['user']['name'] ?></small></span><br>
                           <span class="user-address"><small><?php echo $_SESSION['user']['address'] ?></small></span><br>
-                          <span class="text-warning edit-address" style="cursor:pointer;"><small><i class="fa-regular fa-pen-to-square"></i> Edit Address</span></small>
+                          <span class="user-address"><small><?php echo $_SESSION['user']['phonenum'] ?></small></span><br>
+                          <!-- <span class="text-warning edit-address" style="cursor:pointer;"><small><i class="fa-regular fa-pen-to-square"></i> Edit Address</span></small> -->
                         </div>
                         <!-- Price Details -->
                         <div class="bg-secondary text-light px-4 py-1"><i class="fa-solid fa-dollar-sign"></i> Price Details</div>

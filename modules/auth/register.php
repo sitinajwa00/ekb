@@ -88,8 +88,43 @@ require ASSET_PATH . 'header.php';
             return false;
         }
 
-        if ($('.email').val() == '' || $('.pwd').val() == '' || $('.name').val() == '' || $('.phonenum').val() == '' || $('.address').val() == '' || $('.poscode').val() == '' || $('.city').val() == '' || $('.state').val() == '') {
-            alert('Please complete the form!');
+        if ($('.email').val() == '') {
+            alert('Please complete the email address!');
+            return false;
+        }
+
+        if ($('.pwd').val() == '') {
+            alert('Please fill in the password!');
+            return false;
+        }
+
+        if ($('.name').val() == '') {
+            alert('Please fill in the name!');
+            return false;
+        }
+
+        if ($('.phonenum').val() == '') {
+            alert('Please fill in the phone number!');
+            return false;
+        }
+
+        if ($('.address').val() == '') {
+            alert('Please fill in the address!');
+            return false;
+        }
+
+        if ($('.poscode').val() == '') {
+            alert('Please fill in the poscode!');
+            return false;
+        }
+
+        if ($('.city').val() == '') {
+            alert('Please fill in the city!');
+            return false;
+        }
+
+        if ($('.state').val() == '') {
+            alert('Please fill in the state!');
             return false;
         }
         

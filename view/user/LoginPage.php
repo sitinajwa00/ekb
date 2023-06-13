@@ -38,6 +38,7 @@ class LoginPage extends UserController {
                 $_SESSION['user']['name'] = $result[0]['userName'];
                 $_SESSION['user']['pwd'] = $result[0]['userPassword'];
                 $_SESSION['user']['email'] = $result[0]['userEmail'];
+                $_SESSION['user']['phonenum'] = $result[0]['userPhonenum'];
                 $_SESSION['user']['address'] = $address;
                 $_SESSION['user']['type'] = $result[0]['userType'];
 

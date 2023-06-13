@@ -27,9 +27,6 @@ require ASSET_PATH . 'sidenav_owner.php';
             </nav>
         </div>
         <!-- BEGIN: Content -->
-        <div class="d-flex flex-row justify-content-end">
-            <a href="insert.php"><span class="btn btn-primary">Add New</span></a>
-        </div>
 
         <div>
           <table id="example" class="table bg-white" style="width:100%">

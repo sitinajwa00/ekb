@@ -8,7 +8,7 @@ require ASSET_PATH . 'header.php';
     <div class=" container bg-container">
         <div class="bg-login-container shadow p-3 bg-white rounded">
             <h3 class="pt-3">Sign In</h3>
-            <img class="img-logo" src="<?php echo ASSET_URL ?>/images/default_image.jpg" alt="">
+            <img class="img-logo" src="<?php echo ASSET_URL ?>/images/ekb_logo.png" alt="">
             <hr class="mb-4">
             <form class="px-2 login-form" action="<?php echo APP_URL ?>?module=auth&action=submit" method="post" onsubmit="return validate()">
                 <div class="form-group">
@@ -31,8 +31,14 @@ require ASSET_PATH . 'header.php';
 
 <script>
     function validate() {
-        if ($('#email-input').val() == '' || $('#pass-input').val() == '') {
-            alert('Please complete the login form!');
+        if ($('#email-input').val() == '') {
+            alert('Please fill in the email address!');
+            $('#email-input').focus();
+            return false;
+        }
+
+        if ($('#pass-input').val() == '') {
+            alert('Please fill in the password!');
             $('#email-input').focus();
             return false;
         }
