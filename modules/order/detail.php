@@ -20,8 +20,10 @@ require ASSET_PATH . 'sidenav_owner.php';
 if (isset($_POST['accept'])) {
     $id = $_GET['order_id'];
     $status = 'Processing';
+    $tracknum = $_GET['tracknum'];
     $order = new OrderController();
     $order->changeOrderStatus($id, $status);
+    $order->sendTrackingNumber($id, $tracknum);
 
     echo '<script>
         alert("Order Status: Processing");
@@ -30,8 +32,12 @@ if (isset($_POST['accept'])) {
 } else if (isset($_POST['update_status'])) {
     $id = $_GET['order_id'];
     $status = $_POST['status'];
+    $tracknum = $_POST['tracknum'];
     $order = new OrderController();
     $order->changeOrderStatus($id, $status);
+    
+    $tracking = new OrderController();
+    $tracking->sendTrackingNumber($id, $tracknum);
 
     echo '<script>
         alert("Order Status: '.$status.'");
@@ -49,7 +55,6 @@ if (isset($_POST['accept'])) {
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=home&action=dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=order">Order List</a></li>
                         <li class="breadcrumb-item active text-warning">Detail</li>
                     </ol>
@@ -112,6 +117,10 @@ if (isset($_POST['accept'])) {
                                     <option value="Out For Delivery" <?php echo ($detail['orderStatus']=='Out For Delivery' ? 'selected' : '') ?>>Out For Delivery</option>
                                     <option value="Complete" <?php echo ($detail['orderStatus']=='Complete' ? 'selected' : '') ?>>Complete</option>
                                 </select>
+                                <div class="mb-3">
+                                   <label class="form-label">Tracking Number:</label>
+                                   <input class="form-control" name="tracknum" value="<?php echo $detail['tracking_number'] ?>">
+                                </div>
                                 <button type="submit" name="update_status" class="btn btn-secondary update_btn" <?php echo ($detail['orderStatus']=='Complete' ? 'disabled' : '') ?>>Update</button>
                             </form>
                         </div>

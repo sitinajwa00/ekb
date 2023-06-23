@@ -55,11 +55,10 @@ class User extends Db {
         $stmt->execute([$name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type]);
     }
 
-    protected function updateUser($id, $name, $pwd, $email, $phonenum, $address, $poscode, $city, $state, $type) {
+    protected function updateUser($id, $name, $pwd, $phonenum, $address, $poscode, $city, $state, $type) {
         $sql = "UPDATE users SET 
             userName=:userName, 
             userPassword=:userPassword, 
-            userEmail=:userEmail, 
             userPhonenum=:userPhonenum, 
             userAddress=:userAddress,
             userPoscode=:userPoscode,
@@ -72,7 +71,6 @@ class User extends Db {
         $stmt->bindParam(':userID', $id);
         $stmt->bindParam(':userName', $name);
         $stmt->bindParam(':userPassword', $pwd);
-        $stmt->bindParam(':userEmail', $email);
         $stmt->bindParam(':userPhonenum', $phonenum);
         $stmt->bindParam(':userAddress', $address);
         $stmt->bindParam(':userPoscode', $poscode);

@@ -36,8 +36,7 @@ else if ($_SESSION['user']['type'] == 1)
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item">Sales Report</li>
+                        <li class="breadcrumb-item text-warning active">Sales Report</li>
                     </ol>
                     </nav>
                 </div>

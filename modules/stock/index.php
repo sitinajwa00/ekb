@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                       <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item text-warning active">Stocks</li>
                       </ol>
                     </nav>
                 </div>
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="submit" class="btn btn-warning">Save changes</button>
+                        <button type="submit" name="submit" class="btn btn-warning">Save</button>
                     </div>
                     </div>
                 </div>

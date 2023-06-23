@@ -44,7 +44,7 @@ class EditProfilePage extends UserController {
                                     <!-- Form Group (Email) -->
                                     <div class="col-md-6">
                                         <label for="" class="small mb-1">Email</label>
-                                        <input type="text" class="form-control email" name="email" placeholder="Email" value="<?php echo $detail['userEmail'] ?>" required>  
+                                        <input type="text" class="form-control email" name="email" placeholder="Email" value="<?php echo $detail['userEmail'] ?>" disabled>  
                                     </div>
                                     
                                     <!-- Form Group (Phone) -->
@@ -114,15 +114,6 @@ class EditProfilePage extends UserController {
                                 }
 
                                 function validate() {
-                                    var email = $('.email').val();
-                                    var a = email.indexOf("@");
-                                    var b = email.lastIndexOf(".");
-                                    if(  email != '' && (a < 1 || b < a+2)) {
-                                        alert( "Invalid email address!");
-                                        $('#email-input').focus();
-                                        return false;
-                                    }
-
                                     if ($('.name').val() == '') {
                                         alert('Please fill in the name!');
                                         return false;
@@ -182,8 +173,8 @@ class EditProfilePage extends UserController {
         <?php 
     }
 
-    public function updateProfile($userID, $userName, $userPassword, $userEmail, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType) {
-        $req = $this->editUser($userID, $userName, $userPassword, $userEmail, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType);
+    public function updateProfile($userID, $userName, $userPassword, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType) {
+        $req = $this->editUser($userID, $userName, $userPassword, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType);
 
         echo '<script>
             alert("Successfully Update Profile");

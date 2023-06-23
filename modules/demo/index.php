@@ -121,9 +121,30 @@ require INCL_PATH . 'dashboard.inc.php';
 
 // echo json_encode($result);
 
-$product = new DashboardController();
-$result = $product->displayTotalProductToday();
+// $product = new DashboardController();
+// $result = $product->displayTotalProductToday();
 
-echo json_encode($result);
+// echo json_encode($result);
+
+$demo = array(
+    array("name"=>"abu", "age"=>23, "gender"=>"male"),
+    array("name"=>"siti", "age"=>26, "gender"=>"female"),
+    array("name"=>"aminah", "age"=>27, "gender"=>"female"),
+    array("name"=>"ali", "age"=>27, "gender"=>"male"),
+    array("name"=>"mohd", "age"=>27, "gender"=>"male"),
+);
+
+// echo json_encode($demo);
+$male = []; $female = [];
+
+foreach ($demo as $val) {
+    if ($val['gender'] == 'male') {
+        array_push($male, $val);
+    } else {
+        array_push($female, $val);
+    }
+}
+
+echo json_encode($female);
 
 ?>

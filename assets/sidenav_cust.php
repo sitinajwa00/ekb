@@ -1,4 +1,4 @@
-<body>
+<body id="body-customer">
 
 <!--Main Navigation-->
 <header>
@@ -7,7 +7,7 @@
      id="sidebarMenu"
      class="collapse d-lg-block sidebar collapse bg-white"
      >
-  <div class="position-sticky">
+  <div class="position-sticky d-flex flex-column justify-content-between h-100">
     <div class="list-group list-group-flush mx-3 mt-4">
       <!-- Home -->
       <?php if ($_GET['module'] == 'home') {?>
@@ -69,7 +69,7 @@
       <?php }?>
       
       <!-- Order History -->
-      <?php if ($_GET['action']=='order_history') {?>
+      <?php if ($_GET['action']=='order_history' || $_GET['action']=='order_detail') {?>
       <a
          href="<?php echo APP_URL ?>?module=order&action=order_history"
          class="list-group-item list-group-item-action py-4 ripple active"
@@ -86,14 +86,27 @@
          <i class="fa-solid fa-clock-rotate-left fa-fw me-3"></i><span>Order History</span>
       </a>
       <?php }?>
+    </div>
 
-      <!-- <a
-         href="#"
+    <!-- About Us -->
+    <div class="list-group list-group-flush mx-3 mb-3">
+      <?php if ($_GET['module'] == 'about_us') { ?>
+      <a
+         href="<?php echo APP_URL ?>?module=about_us"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+         <i class="fa-solid fa-shop fa-fw me-3"></i><span>About Us</span>
+      </a>
+      <?php } else {?> 
+      <a
+         href="<?php echo APP_URL ?>?module=about_us"
          class="list-group-item list-group-item-action py-4 ripple"
          aria-current="true"
          >
-         <i class="fa-solid fa-phone fa-fw me-3"></i><span>Contact Us</span>
-      </a> -->
+         <i class="fa-solid fa-shop fa-fw me-3"></i><span>About Us</span>
+      </a>
+      <?php } ?>
     </div>
   </div>
 </nav>

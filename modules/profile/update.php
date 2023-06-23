@@ -33,6 +33,7 @@ $state = array(
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=home&action=dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="<?php echo APP_URL ?>?module=profile">Profile</a></li>
+                        <li class="breadcrumb-item text-warning active">Update Profile</li>
                     </ol>
                     </nav>
                 </div>

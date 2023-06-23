@@ -67,8 +67,8 @@ class UserController extends User {
         // $this->setUserDetails($userName, $userPassword, $userEmail, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType);
     }
 
-    public function editUser($userID, $userName, $userPassword, $userEmail, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType) {
-        $this->updateUser($userID, $userName, $userPassword, $userEmail, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType);
+    public function editUser($userID, $userName, $userPassword, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType) {
+        $this->updateUser($userID, $userName, $userPassword, $userPhonenum, $userAddress, $userPoscode, $userCity, $userState, $userType);
     }
 
     public function removeUser($userID) {

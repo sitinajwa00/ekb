@@ -75,7 +75,6 @@ if (isset($_POST['save'])) {
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=home&action=dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=product">Products</a></li>
                         <li class="breadcrumb-item active text-warning">Update Product</li>
                     </ol>

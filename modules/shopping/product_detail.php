@@ -25,7 +25,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=order&action=product">Product List</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=shopping">Product List</a></li>
                         <li class="breadcrumb-item text-warning active">Product Detail</li>
                     </ol>
                     </nav>
@@ -94,7 +94,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                                         Postage
                                     </label>
                                 </div>
-                                <div class="form-check" <?php echo ($detail['is_cod'] == 0 ? 'hidden' : '') ?>>
+                                <div class="form-check" <?php echo ($detail['is_cod'] == 0 || $_SESSION['user']['state'] != 'johor' ? 'hidden' : '') ?>>
                                     <input class="form-check-input" type="radio" name="delivery_type" value="cod" id="radio2">
                                     <label class="form-check-label" for="radio2">
                                         Cash On Delivery

@@ -56,6 +56,10 @@ class OrderController extends Order {
     public function changeOrderStatus($id, $status) {
         $this->updateOrderStatus($id, $status);
     }
+
+    public function sendTrackingNumber($id, $num) {
+        $this->saveTrackingNumber($id, $num);
+    }
 }
 
 ?>

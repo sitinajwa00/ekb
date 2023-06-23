@@ -2,15 +2,15 @@
 
 class Order extends Db {
     protected function makeOrderPos($custID, $chargeID, $item, $amount, $shipAddress, $status) {
-        $sql = "INSERT INTO orders(custID, chargeID, deliveryType, orderItem, totalPrice, shippingAddress, orderStatus) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO orders(custID, chargeID, deliveryType, orderItem, totalPrice, shippingAddress, orderStatus, tracking_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$custID, $chargeID, 'Postage', $item, $amount, $shipAddress, 'Pending']);
+        $stmt->execute([$custID, $chargeID, 'Postage', $item, $amount, $shipAddress, 'Pending', '']);
     }
 
     protected function makeOrderCod($custID, $item, $amount, $shipAddress, $status) {
-        $sql = "INSERT INTO orders(custID, deliveryType, orderItem, totalPrice, shippingAddress, orderStatus) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO orders(custID, chargeID, deliveryType, orderItem, totalPrice, shippingAddress, orderStatus, tracking_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$custID, 'COD', $item, $amount, $shipAddress, 'Pending']);
+        $stmt->execute([$custID, '', 'COD', $item, $amount, $shipAddress, 'Pending', '']);
     }
 
     protected function getOrderID($custID) {
@@ -72,6 +72,16 @@ class Order extends Db {
         $stmt->bindParam(':orderID', $id);
         $stmt->bindParam(':orderStatus', $status);
 
+        $stmt->execute();
+    }
+
+    protected function saveTrackingNumber($id, $num) {
+        $sql = "UPDATE orders SET tracking_number=:tracknum WHERE orderID=:orderID";
+        $stmt = $this->connect()->prepare($sql);
+        
+        $stmt->bindParam(':orderID', $id);
+        $stmt->bindParam(':tracknum', $num);
+        
         $stmt->execute();
     }
 }

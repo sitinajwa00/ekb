@@ -1,5 +1,5 @@
 
-  <body>
+  <body id="body-default">
 
 <!--Main Navigation-->
 <header>
@@ -10,14 +10,47 @@
      >
   <div class="position-sticky">
     <div class="list-group list-group-flush mx-3 mt-4">
+      <!-- Home -->
+      <?php if ($_GET['module'] == 'home') {?> 
       <a
-         href="#"
+         href="<?php echo APP_URL ?>?module=home&action=view"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+        <i class="fas fa-tachometer-alt fa-fw me-3"></i
+          ><span>Home</span>
+      </a>
+      <?php } else {?>
+      <a
+         href="<?php echo APP_URL ?>?module=home&action=view"
          class="list-group-item list-group-item-action py-4 ripple "
          aria-current="true"
          >
         <i class="fas fa-tachometer-alt fa-fw me-3"></i
-          ><span>Main dashboard</span>
+          ><span>Home</span>
       </a>
+      <?php }?>
+
+      <!-- About Us -->
+      <?php if ($_GET['module'] == 'about_us') {?> 
+      <a
+         href="<?php echo APP_URL ?>?module=about_us"
+         class="list-group-item list-group-item-action py-4 ripple active"
+         aria-current="true"
+         >
+        <i class="fas fa-tachometer-alt fa-fw me-3"></i
+          ><span>About Us</span>
+      </a>
+      <?php } else {?>
+      <a
+         href="<?php echo APP_URL ?>?module=about_us"
+         class="list-group-item list-group-item-action py-4 ripple "
+         aria-current="true"
+         >
+        <i class="fas fa-shop fa-fw me-3"></i
+          ><span>About Us</span>
+      </a>
+      <?php }?>
     </div>
   </div>
 </nav>
@@ -26,7 +59,7 @@
 <!-- Navbar -->
 <nav
      id="main-navbar"
-     class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+     class="navbar navbar-expand-lg navbar-light bg-black fixed-top"
      >
   <!-- Container wrapper -->
   <div class="container-fluid">
@@ -46,29 +79,32 @@
     <!-- Brand -->
     <a class="navbar-brand" href="#">
       <img
-           src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-           height="25"
-           alt=""
-           loading="lazy"
-           />
+        src="<?php echo IMG_URL ?>ekb-logo-wt.png"
+        height="30"
+        alt=""
+        loading="lazy"
+      />
+      <span class="ms-3 text-warning" style="font-family:'Lato', sans-serif;"><b>EMPAYAR</b> KEREPEK BAWANG</span>
     </a>
 
     <!-- Checking Session -->
-    <span><?php echo (isset($_SESSION['user']) ? $_SESSION['user']['name'] : '') ?></span>
+    <!-- <span><?php echo (isset($_SESSION['user']) ? $_SESSION['user']['name'] : '') ?></span> -->
 
     <!-- Right links -->
     <ul class="navbar-nav ms-auto d-flex flex-row">
 
       <!-- Icon -->
       <li class="nav-item">
-        <a class="nav-link me-3 me-lg-0" href="#">
-          <i class="fa-solid fa-cart-shopping"></i>
+        <a class="nav-link text-warning me-3 me-lg-0" href="<?php echo APP_URL ?>?module=auth&action=register">
+          <!-- <i class="fa-solid fa-cart-shopping"></i> -->
+          Register
         </a>
       </li>
       <!-- Icon -->
       <li class="nav-item me-3 me-lg-0">
-        <a class="nav-link" href="profile.html">
-          <i class="fa-solid fa-user"></i>
+        <a class="nav-link text-warning" href="<?php echo APP_URL ?>?module=auth&action=login">
+          <!-- <i class="fa-solid fa-user"></i> -->
+          Sign In
         </a>
       </li>
       <!-- Icon -->

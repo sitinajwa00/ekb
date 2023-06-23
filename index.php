@@ -23,18 +23,34 @@ if (isset($_GET['module'])) {
 
     session_start();
 
-    if (!isset($_SESSION['user']) && $_GET['module'] != 'auth') {
-        echo '<script>
-            alert("Redirect to login page");
-            window.location.href = " ' . APP_URL . '?module=auth&action=login ";
-        </script>';
-        // header('Location: ' . APP_URL . '?module=auth&action=login');
-    }
+    // if (!isset($_SESSION['user']) && ($_GET['module'] != 'auth')) {
+    //     echo '<script>
+    //         alert("Redirect to login page");
+    //         window.location.href = " ' . APP_URL . '?module='.$_GET['module'].'&action='.$_GET['action'].' ";
+    //     </script>';
+    // }
     
     require $filepath;
 
 } else {
-    echo 'index_file';
+    // echo 'index_file';
+    session_start();
+    if (isset($_SESSION['user']) && $_SESSION['user']['type']=='2') {
+        echo '<script>
+            window.location.href = " ' . APP_URL . '?module=home&action=index";
+        </script>';
+    } else if (isset($_SESSION['user']) && $_SESSION['user']['type']!='2'){
+        echo '<script>
+            window.location.href = " ' . APP_URL . '?module=home&action=dashboard ";
+        </script>';
+    } else if (!isset($_SESSION['user'])){
+        echo '<script>
+            window.location.href = " ' . APP_URL . '?module=home&action=view ";
+        </script>';
+    }
+    // echo '<script>
+    //         window.location.href = " ' . APP_URL . '?module=auth&action=login ";
+    //     </script>';
 
 }
 

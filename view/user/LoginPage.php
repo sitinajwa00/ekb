@@ -40,11 +40,12 @@ class LoginPage extends UserController {
                 $_SESSION['user']['email'] = $result[0]['userEmail'];
                 $_SESSION['user']['phonenum'] = $result[0]['userPhonenum'];
                 $_SESSION['user']['address'] = $address;
+                $_SESSION['user']['state'] = $result[0]['userState'];
                 $_SESSION['user']['type'] = $result[0]['userType'];
 
                 if ($_SESSION['user']['type'] == 0) {
                     echo '<script>
-                        alert("Welcome, '.$_SESSION['user']['name'].'");
+                        alert("Welcome");
                         window.location.href = "'.APP_URL.'?module=home&action=dashboard";
                     </script>';
                 } else if ($_SESSION['user']['type'] == 1) {

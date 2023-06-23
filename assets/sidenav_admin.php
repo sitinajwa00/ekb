@@ -1,5 +1,5 @@
 
-  <body>
+  <body id="body-admin">
 
 <!--Main Navigation-->
 <header>
@@ -8,7 +8,7 @@
      id="sidebarMenu"
      class="collapse d-lg-block sidebar collapse bg-white"
      >
-  <div class="position-sticky">
+  <div class="position-sticky d-flex flex-column justify-content-between h-100">
     <div class="list-group list-group-flush mx-3 mt-4">
       <!-- Dashboard -->
       <?php if ($_GET['module'] == 'home') {?> 
@@ -87,14 +87,28 @@
          <i class="fa-solid fa-list fa-fw me-3"></i><span>Sales Report</span>
       </a>
       <?php }?> 
+      </div>
 
-      <!-- <a
-         href="#"
-         class="list-group-item list-group-item-action py-4 ripple"
-         aria-current="true"
-         >
-         <i class="fa-solid fa-user fa-fw me-3"></i><span>User</span>
-      </a> -->
+      <!-- About Us -->
+      <div class="list-group list-group-flush mx-3 mb-3">
+        <?php if ($_GET['module'] == 'about_us') { ?>
+        <a
+          href="<?php echo APP_URL ?>?module=about_us"
+          class="list-group-item list-group-item-action py-4 ripple active"
+          aria-current="true"
+          >
+          <i class="fa-solid fa-shop fa-fw me-3"></i><span>About Us</span>
+        </a>
+        <?php } else {?> 
+        <a
+          href="<?php echo APP_URL ?>?module=about_us"
+          class="list-group-item list-group-item-action py-4 ripple"
+          aria-current="true"
+          >
+          <i class="fa-solid fa-shop fa-fw me-3"></i><span>About Us</span>
+        </a>
+        <?php } ?>
+      </div>
     </div>
   </div>
 </nav>

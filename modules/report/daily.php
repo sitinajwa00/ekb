@@ -90,9 +90,8 @@ if (isset($_POST['filter_cod']) && isset($_GET['filter'])) {
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=report">Sales Report</a></li>
-                        <li class="breadcrumb-item">Daily Sales Report</li>
+                        <li class="breadcrumb-item text-warning active">Daily Sales Report</li>
                     </ol>
                     </nav>
                 </div>

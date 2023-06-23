@@ -26,9 +26,8 @@ $count_pos = $_SESSION['cart']['pos'];
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=home&action=dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=order&action=cart">Cart</a></li>
-                        <li class="breadcrumb-item text-warning">Order Information</li>
+                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=cart">My Cart</a></li>
+                        <li class="breadcrumb-item text-warning active">Check Out</li>
                     </ol>
                     </nav>
                 </div>

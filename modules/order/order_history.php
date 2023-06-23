@@ -12,7 +12,33 @@ $result = $all_cart->displayAllCartsByUser($_SESSION['user']['id']);
 $cart_list = $result;
 $cartCount = count($cart_list);
 
-// echo json_encode($order_result);
+$pending_order = [];
+$processing_order = [];
+$to_ship_order = [];
+$out_for_delivery_order = [];
+$complete_order = [];
+
+// echo json_encode($order_result); exit;
+
+foreach ($order_result as $val) {
+    switch ($val['orderStatus']) {
+        case "Pending":
+            array_push($pending_order, $val);
+            break;
+        case "Processing":
+            array_push($processing_order, $val);
+            break;
+        case "To Ship":
+            array_push($to_ship_order, $val);
+            break;
+        case "Out For Delivery":
+            array_push($out_for_delivery_order, $val);
+            break;
+        case "Complete":
+            array_push($complete_order, $val);
+            break;
+    }
+}
 
 $pending = 0; $processing = 0; $to_ship = 0; $out_for_delivery = 0; $complete = 0;
 
@@ -49,8 +75,7 @@ require ASSET_PATH . 'sidenav_cust.php';
                     <div class="container-fluid">
                       <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                          <li class="breadcrumb-item active" aria-current="page"><a href="order_history.html"><span class="text-primary">My Purchase</span></a></li>
+                          <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo APP_URL ?>?module=order&action=order_history"><span class="text-warning">Order History</span></a></li>
                         </ol>
                       </nav>
                     </div>
@@ -90,206 +115,96 @@ require ASSET_PATH . 'sidenav_cust.php';
                 <!-- Tab Content: Pending -->
                 <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                     <div class="bg-white py-5 container">
-                        <?php 
-                        $count = 0;
-                        foreach ($order_result as $val) {
-                            if ($val['orderStatus']=='Pending') {
-                                echo '
-                                <div class="bg-light mb-4 border border-dark">
-                                    <table class="table align-middle border border-secondary mb-0">
-                                        <tbody data-id="'.$val['orderID'].'">
-                                            <tr class="bg-dark text-light">
-                                                <td class="fw-bold"><i>'.date('d M Y', strtotime($val['date'])).'</i></td>
-                                                <td></td>
-                                                <td class="fw-bold text-end">'.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'</td>
-                                            </tr>';
-                                            $order_item = new OrderController();
-                                            $item_list = $order_item->displayAllItemsByOrderID($val['orderID']);
-
-                                            foreach ($item_list as $value) { 
-                                                echo '<tr>
-                                                    <td class="col-6">'.$value['product_name'].'</td>
-                                                    <td>x'.$value['qty'].'</td>
-                                                    <td class="text-end">'.$value['total_price'].'</td>
-                                                </tr>';
-                                            } 
-                                            echo '<tr>
-                                                <td colspan="3" class="text-end fw-bold">Total: RM '.$val['totalPrice'].'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                ';
-                                $count++;
-                            }
-                        }
-                        if ($count == 0)
-                            echo '<div class="text-center"><span>No Order Available</span></div>';
-                        ?>
+                        <div>
+                            <table id="pendingOrder" class="table bg-white" style="width:100%">
+                                <thead>
+                                    <tr class="bg-secondary text-dark">
+                                        <th>No</th>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Delivery Type</th>
+                                        <th>Total Price (RM)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- Tab Content: Processing -->
                 <div class="tab-pane fade" id="processing" role="tabpanel" aria-labelledby="processing-tab">
                     <div class="bg-white py-5 container">
-                    <?php 
-                        $count = 0;
-                        foreach ($order_result as $val) {
-                            if ($val['orderStatus']=='Processing') {
-                                echo '
-                                <div class="bg-light mb-4 border border-dark">
-                                    <table class="table align-middle border border-secondary mb-0">
-                                        <tbody data-id="'.$val['orderID'].'">
-                                            <tr class="bg-dark text-light">
-                                                <td class="fw-bold"><i>'.date('d M Y', strtotime($val['date'])).'</i></td>
-                                                <td></td>
-                                                <td class="fw-bold text-end">'.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'</td>
-                                            </tr>';
-                                            $order_item = new OrderController();
-                                            $item_list = $order_item->displayAllItemsByOrderID($val['orderID']);
-
-                                            foreach ($item_list as $value) { 
-                                                echo '<tr>
-                                                    <td class="col-6">'.$value['product_name'].'</td>
-                                                    <td>x'.$value['qty'].'</td>
-                                                    <td class="text-end">'.$value['total_price'].'</td>
-                                                </tr>';
-                                            } 
-                                            echo '<tr>
-                                                <td colspan="3" class="text-end fw-bold">Total: RM '.$val['totalPrice'].'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                ';
-                                $count++;
-                            }
-                        }
-                        if ($count == 0)
-                            echo '<div class="text-center"><span>No Order Available</span></div>';
-                        ?>
+                        <div>
+                            <table id="processingOrder" class="table bg-white" style="width:100%">
+                                <thead>
+                                    <tr class="bg-secondary text-dark">
+                                        <th>No</th>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Delivery Type</th>
+                                        <th>Total Price (RM)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- Tab Content: Shipping -->
                 <div class="tab-pane fade" id="ship" role="tabpanel" aria-labelledby="ship-tab">
                     <div class="bg-white py-5 container">
-                    <?php 
-                        $count = 0;
-                        foreach ($order_result as $val) {
-                            if ($val['orderStatus']=='To Ship') {
-                                echo '
-                                <div class="bg-light mb-4 border border-dark">
-                                    <table class="table align-middle border border-secondary mb-0">
-                                        <tbody data-id="'.$val['orderID'].'">
-                                            <tr class="bg-dark text-light">
-                                                <td class="fw-bold"><i>'.date('d M Y', strtotime($val['date'])).'</i></td>
-                                                <td></td>
-                                                <td class="fw-bold text-end">'.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'</td>
-                                            </tr>';
-                                            $order_item = new OrderController();
-                                            $item_list = $order_item->displayAllItemsByOrderID($val['orderID']);
-
-                                            foreach ($item_list as $value) { 
-                                                echo '<tr>
-                                                    <td class="col-6">'.$value['product_name'].'</td>
-                                                    <td>x'.$value['qty'].'</td>
-                                                    <td class="text-end">'.$value['total_price'].'</td>
-                                                </tr>';
-                                            } 
-                                            echo '<tr>
-                                                <td colspan="3" class="text-end fw-bold">Total: RM '.$val['totalPrice'].'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                ';
-                                $count++;
-                            }
-                        }
-                        if ($count == 0)
-                            echo '<div class="text-center"><span>No Order Available</span></div>';
-                        ?>
+                        <div>
+                            <table id="toShip" class="table bg-white" style="width:100%">
+                                <thead>
+                                    <tr class="bg-secondary text-dark">
+                                        <th>No</th>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Delivery Type</th>
+                                        <th>Total Price (RM)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- Tab Content: Delivery -->
                 <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
                     <div class="bg-white py-5 container">
-                    <?php 
-                        $count = 0;
-                        foreach ($order_result as $val) {
-                            if ($val['orderStatus']=='Out For Delivery') {
-                                echo '
-                                <div class="bg-light mb-4 border border-dark">
-                                    <table class="table align-middle border border-secondary mb-0">
-                                        <tbody data-id="'.$val['orderID'].'">
-                                            <tr class="bg-dark text-light">
-                                                <td class="fw-bold"><i>'.date('d M Y', strtotime($val['date'])).'</i></td>
-                                                <td></td>
-                                                <td class="fw-bold text-end">'.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'</td>
-                                            </tr>';
-                                            $order_item = new OrderController();
-                                            $item_list = $order_item->displayAllItemsByOrderID($val['orderID']);
-
-                                            foreach ($item_list as $value) { 
-                                                echo '<tr>
-                                                    <td class="col-6">'.$value['product_name'].'</td>
-                                                    <td>x'.$value['qty'].'</td>
-                                                    <td class="text-end">'.$value['total_price'].'</td>
-                                                </tr>';
-                                            } 
-                                            echo '<tr>
-                                                <td colspan="3" class="text-end fw-bold">Total: RM '.$val['totalPrice'].'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                ';
-                                $count++;
-                            }
-                        }
-                        if ($count == 0)
-                            echo '<div class="text-center"><span>No Order Available</span></div>';
-                        ?>
+                        <div>
+                            <table id="outForDelivery" class="table bg-white" style="width:100%">
+                                <thead>
+                                    <tr class="bg-secondary text-dark">
+                                        <th>No</th>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Delivery Type</th>
+                                        <th>Total Price (RM)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- Tab Content: Complete -->
                 <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">
                     <div class="bg-white py-5 container">
-                    <?php 
-                        $count = 0;
-                        foreach ($order_result as $val) {
-                            if ($val['orderStatus']=='Complete') {
-                                echo '
-                                <div class="bg-light mb-4 border border-dark">
-                                    <table class="table align-middle border border-secondary mb-0">
-                                        <tbody data-id="'.$val['orderID'].'">
-                                            <tr class="bg-dark text-light">
-                                                <td class="fw-bold"><i>'.date('d M Y', strtotime($val['date'])).'</i></td>
-                                                <td></td>
-                                                <td class="fw-bold text-end">'.($val['deliveryType']=='COD' ? 'Cash On Delivery' : 'Postage').'</td>
-                                            </tr>';
-                                            $order_item = new OrderController();
-                                            $item_list = $order_item->displayAllItemsByOrderID($val['orderID']);
-
-                                            foreach ($item_list as $value) { 
-                                                echo '<tr>
-                                                    <td class="col-6">'.$value['product_name'].'</td>
-                                                    <td>x'.$value['qty'].'</td>
-                                                    <td class="text-end">'.$value['total_price'].'</td>
-                                                </tr>';
-                                            } 
-                                            echo '<tr>
-                                                <td colspan="3" class="text-end fw-bold">Total: RM '.$val['totalPrice'].'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                ';
-                                $count++;
-                            }
-                        }
-                        if ($count == 0)
-                            echo '<div class="text-center"><span>No Order Available</span></div>';
-                        ?>
+                        <div>
+                            <table id="completeOrder" class="table bg-white" style="width:100%">
+                                <thead>
+                                    <tr class="bg-secondary text-dark">
+                                        <th>No</th>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Delivery Type</th>
+                                        <th>Total Price (RM)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -305,6 +220,181 @@ require ASSET_PATH . 'sidenav_cust.php';
             if (cart_count > 0)
                 $('.my-cart-badge-2').html('My Cart&emsp;<span class="badge badge-warning">'+cart_count+'</span>');
         });
+
+        // Pending Table
+        var p = $('#pendingOrder').DataTable({
+            data: <?php echo json_encode($pending_order) ?>,
+            src: 'data',
+            columns: [
+                { data: 'orderID' },
+                { data: 'orderID' },
+                { data: 'date' },
+                { data: 'deliveryType' },
+                { data: 'totalPrice' },
+                { data: '' }
+            ],
+            columnDefs: [
+                {
+                targets: -1,
+                render: function(data, type, full, meta) {
+                    return (
+                        '<div class="d-flex flex-row justify-content-end">' +
+                            '<a href="<?php echo APP_URL ?>?module=order&action=order_detail&order_id='+full['orderID']+'"><span class="btn btn-warning me-1">View</span></a>' +
+                        '</div>'
+                    );
+                }
+                }
+            ],
+            dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            });
+        
+        p.on('order.dt search.dt', function () {
+            let i = 1;
+ 
+            p.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    // Processing Table
+    var pc = $('#processingOrder').DataTable({
+            data: <?php echo json_encode($processing_order) ?>,
+            src: 'data',
+            columns: [
+                { data: 'orderID' },
+                { data: 'orderID' },
+                { data: 'date' },
+                { data: 'deliveryType' },
+                { data: 'totalPrice' },
+                { data: '' }
+            ],
+            columnDefs: [
+                {
+                targets: -1,
+                render: function(data, type, full, meta) {
+                    return (
+                        '<div class="d-flex flex-row justify-content-end">' +
+                            '<a href="<?php echo APP_URL ?>?module=order&action=order_detail&order_id='+full['orderID']+'"><span class="btn btn-warning me-1">View</span></a>' +
+                        '</div>'
+                    );
+                }
+                }
+            ],
+            dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            });
+        
+        pc.on('order.dt search.dt', function () {
+            let i = 1;
+ 
+            pc.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    // To Ship Table
+    var ts = $('#toShip').DataTable({
+            data: <?php echo json_encode($to_ship_order) ?>,
+            src: 'data',
+            columns: [
+                { data: 'orderID' },
+                { data: 'orderID' },
+                { data: 'date' },
+                { data: 'deliveryType' },
+                { data: 'totalPrice' },
+                { data: '' }
+            ],
+            columnDefs: [
+                {
+                targets: -1,
+                render: function(data, type, full, meta) {
+                    return (
+                        '<div class="d-flex flex-row justify-content-end">' +
+                            '<a href="<?php echo APP_URL ?>?module=order&action=order_detail&order_id='+full['orderID']+'"><span class="btn btn-warning me-1">View</span></a>' +
+                        '</div>'
+                    );
+                }
+                }
+            ],
+            dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            });
+        
+        ts.on('order.dt search.dt', function () {
+            let i = 1;
+ 
+            ts.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+
+        // Out For Delivery Table
+        var d = $('#outForDelivery').DataTable({
+            data: <?php echo json_encode($out_for_delivery_order) ?>,
+            src: 'data',
+            columns: [
+                { data: 'orderID' },
+                { data: 'orderID' },
+                { data: 'date' },
+                { data: 'deliveryType' },
+                { data: 'totalPrice' },
+                { data: '' }
+            ],
+            columnDefs: [
+                {
+                targets: -1,
+                render: function(data, type, full, meta) {
+                    return (
+                        '<div class="d-flex flex-row justify-content-end">' +
+                            '<a href="<?php echo APP_URL ?>?module=order&action=order_detail&order_id='+full['orderID']+'"><span class="btn btn-warning me-1">View</span></a>' +
+                        '</div>'
+                    );
+                }
+                }
+            ],
+            dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            });
+        
+        d.on('order.dt search.dt', function () {
+            let i = 1;
+ 
+            d.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    // Complete Table
+    var c = $('#completeOrder').DataTable({
+            data: <?php echo json_encode($complete_order) ?>,
+            src: 'data',
+            columns: [
+                { data: 'orderID' },
+                { data: 'orderID' },
+                { data: 'date' },
+                { data: 'deliveryType' },
+                { data: 'totalPrice' },
+                { data: '' }
+            ],
+            columnDefs: [
+                {
+                targets: -1,
+                render: function(data, type, full, meta) {
+                    return (
+                        '<div class="d-flex flex-row justify-content-end">' +
+                            '<a href="<?php echo APP_URL ?>?module=order&action=order_detail&order_id='+full['orderID']+'"><span class="btn btn-warning me-1">View</span></a>' +
+                        '</div>'
+                    );
+                }
+                }
+            ],
+            dom: '<"mb-3"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 mb-3 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            });
+        
+    c.on('order.dt search.dt', function () {
+            let i = 1;
+ 
+            c.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
     </script>
 
 <?php 

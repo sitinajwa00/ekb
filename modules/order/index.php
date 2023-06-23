@@ -20,7 +20,6 @@ require ASSET_PATH . 'sidenav_owner.php';
                 <div class="container-fluid">
                     <nav aria-label="breadcrumb">
                       <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo APP_URL ?>?module=home&action=dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item active text-warning">Order List</li>
                       </ol>
                     </nav>

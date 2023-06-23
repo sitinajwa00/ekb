@@ -65,7 +65,7 @@ function thousandsCurrencyFormat($num) {
             <div class="container-fluid">
                 <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item text-warning active">Dashboard</li>
                 </ol>
                 </nav>
             </div>
